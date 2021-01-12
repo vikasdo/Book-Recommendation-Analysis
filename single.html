@@ -27,7 +27,7 @@
  <form class="form-inline pt-4 pl-2 d-flex justify-content-center md-form form-sm lg-form ">
   <input class="form-control mr-3 mb-4 w-75" type="text" placeholder="Search"
     aria-label="Search" >
-  <i class="fas fa-search mr-3 mb-4" aria-hidden="true"></i>
+  <i class="fa fa-search mr-3 mb-4" aria-hidden="true"></i>
 </form>
   <!-- Links -->
   <div class="collapse navbar-collapse" id="basicExampleNav1">
@@ -92,15 +92,15 @@
             <h6>Subject : Design and Electronics</h6><br>
             <div class="d-flex row justify-content-center">
             <div class="d-flex star-widget flex-row-reverse justify-content-center">
-                <input type="radio" name="rate" id="rate-1" value="" ><label for="rate-1"  class="fa fa-star"></label>
+                <input type="radio" name="rate" id="rate-1" value="5" ><label for="rate-1"  class="fa fa-star"></label>
                 
-                <input type="radio" name="rate" id="rate-2"><label for="rate-2" class="fa fa-star"></label>
+                <input type="radio" name="rate" id="rate-2" value="4"><label for="rate-2" class="fa fa-star"></label>
                 
-                <input type="radio" name="rate" id="rate-3"><label for="rate-3" class="fa fa-star"></label>
+                <input type="radio" name="rate" id="rate-3" value="3"><label for="rate-3" class="fa fa-star"></label>
                 
-                <input type="radio" name="rate" id="rate-4"><label for="rate-4" class="fa fa-star"></label>
+                <input type="radio" name="rate" id="rate-4" value="2"><label for="rate-4" class="fa fa-star"></label>
                 
-                <input type="radio" name="rate" id="rate-5"><label for="rate-5" class="fa fa-star"></label>
+                <input type="radio" name="rate" id="rate-5" value="1"><label for="rate-5" class="fa fa-star"></label>
 
                 <div class="row m-1" style="font-weight: bold; width: 100%;">
                     <header id="rating-review"></header>
@@ -150,11 +150,7 @@
     <script>
 
         $(document).ready(function(){
-            /*
-            $('desc-para').hide();
-            $('product-para').hide();
-            $('reviews-para').hide();
-*/
+         
             $('#desc').click(function(){
               $('#desc-para').show(100);
                 $('#product-para').hide();
@@ -171,29 +167,34 @@
                 $('#product-para').hide();
             })
 
-            let val = $('rating-review').text()
-            console.log(val)
-            data = {
-                user_id:"BX1023",
-                Rating: val,
-            }
+            var fetch_rating=0;
 
-/*
-            $.ajax({
-                url:"/home",
-                type:post,
-                success: function(){
-                    console.log("Data Sent...")
-                },
-                error: function(){
-                    console.log("Data Error...")
+            $('input:radio').click(()=>{
+                
+                fetch_rating= $('input[type=radio][name=rate]:checked').attr('value')
+                console.log(fetch_rating)
+
+                data_to_send = {
+                    user_id:"BX1023",
+                    user_rating:fetch_rating,
                 }
+                console.log(data_to_send);
+                    
+                $.ajax({
+                    url:"/home",
+                    type:"post",
+                    data:data_to_send,
+                    success: function(){
+                        console.log("Data Sent...")
+                    },
+                    error: function(){
+                        console.log("Data Error...")
+                    }
 
-            })
-*/
-
-
-        })
+                }) // ajax
+            }) // clickes
+         
+        }) // doc
 
     </script>
 
