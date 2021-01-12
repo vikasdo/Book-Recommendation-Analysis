@@ -25,9 +25,6 @@ def login():
     if request.method == 'POST':
         username = request.form['username']
         password = request.form['password']
-        registeredUser = users_repository.get_user(username)
-        print('Users '+ str(users_repository.users))
-        print('Register user %s , password %s' % (registeredUser.username, registeredUser.password))
         if registeredUser != None and registeredUser.password == password:
             print('Logged in..')
             login_user(registeredUser)
