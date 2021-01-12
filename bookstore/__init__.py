@@ -13,6 +13,7 @@ from flask_script import Manager
 from werkzeug.exceptions import HTTPException
 from flask_login import LoginManager
 from itsdangerous import URLSafeSerializer
+
 # import psycopg2
 # import pymysql
 # import logging
@@ -24,6 +25,10 @@ from itsdangerous import URLSafeSerializer
 
 # Initializing Flask App
 app = Flask(__name__)
+
+
+
+app.secret_key="Vampire"
 
 # This video demonstrates why we use CORS in our Flask App - https://www.youtube.com/watch?v=vWl5XcvQBx0
 CORS(app)
@@ -72,9 +77,11 @@ basic_auth = BasicAuth(app)
 # Creating serializer object of URLSafeSerializer class for serializing session_token
 serializer = URLSafeSerializer(app.secret_key)
 
+
+
 # Creating login_manager object of LoginManager class for implementing Flask-Login
 login_manager = LoginManager(app)
-login_manager.login_view = 'client.login'
+login_manager.login_view = 'login'
 login_manager.init_app(app)
 
 
@@ -82,7 +89,6 @@ login_manager.init_app(app)
 @login_manager.user_loader
 def load_user(session_token):
 	return User.query.filter_by(session_token=session_token).first()
-
 
 from bookstore.client.views import client
 
