@@ -1,4 +1,4 @@
-from reviewcruncher import db
+from bookstore import db
 from flask_login import UserMixin
 
 
