@@ -35,10 +35,12 @@ CORS(app)
 db = SQLAlchemy(app)
 db.init_app(app)
 
+
+app.config.from_object("config.DevelopmentConfig")
+
 SQLITE_DB_DIR = os.path.join( os.path.dirname(os.path.realpath(__file__)), 'db.sqlite')
-SQLALCHEMY_DATABASE_URI = "sqlite:///"+SQLITE_DB_DIR
-SQLALCHEMY_ECHO = False
-SQLALCHEMY_TRACK_MODIFICATIONS=False
+
+
 migrate = Migrate(app, db, render_as_batch=True)
 
 with app.app_context():
