@@ -34,6 +34,7 @@ app.secret_key="Vampire"
 CORS(app)
 
 
+app.config.from_object("config.DevelopmentConfig")
 
 
 # Creating and Initializing db object of SQLAlchemy class
@@ -41,7 +42,6 @@ db = SQLAlchemy(app)
 db.init_app(app)
 
 
-app.config.from_object("config.DevelopmentConfig")
 
 SQLITE_DB_DIR = os.path.join( os.path.dirname(os.path.realpath(__file__)), 'db.sqlite')
 
