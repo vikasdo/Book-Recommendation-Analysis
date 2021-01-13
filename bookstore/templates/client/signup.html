@@ -1,0 +1,17 @@
+{% extends 'client/header.html' %}
+
+
+{% block content %}
+<div class="col-lg-6 offset-3">
+<form action="/register" method="POST">
+	<input type="text" name="username"><br>
+	<input type="text" name="pwd"><br>
+		<input type="text" name="age"><br>
+
+	<input type="submit" name="submit-btn" value="submit">
+	
+</form>
+</div>
+
+
+{% endblock content %}

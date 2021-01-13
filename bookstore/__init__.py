@@ -7,7 +7,7 @@ import os
 
 # from flask_admin import Admin, AdminIndexView
 # from flask_admin.contrib.sqla import ModelView
-from flask_sqlalchemy import SQLAlchemy 
+from flask_sqlalchemy import SQLAlchemy  as _BaseSQLAlchemy
 from flask_migrate import Migrate, MigrateCommand
 from flask_script import Manager
 from werkzeug.exceptions import HTTPException
@@ -37,13 +37,28 @@ CORS(app)
 app.config.from_object("config.DevelopmentConfig")
 
 
+class SQLAlchemy(_BaseSQLAlchemy):
+	"""
+	This class is defined so that we can set "pool_pre_ping" to True.
+	pool_pre_ping is a boolean flag, which when set to True,
+	will enable the connection pool 'pre-ping' feature
+	that tests connections for liveness upon each checkout.
+	
+	This prevents from dropping of database connection with our app.
+	This class inherits the original SQLAlchemy class,
+	and nothing else is changed except pool_pre_ping flag
+	https://docs.sqlalchemy.org/en/13/core/pooling.html#dealing-with-disconnects
+	https://github.com/pallets/flask-sqlalchemy/issues/589
+	"""
+	def apply_pool_defaults(self, app, options):
+		super(SQLAlchemy, self).apply_pool_defaults(app, options)
+		options["pool_pre_ping"] = True
 # Creating and Initializing db object of SQLAlchemy class
 db = SQLAlchemy(app)
 db.init_app(app)
 
 
 
-SQLITE_DB_DIR = os.path.join( os.path.dirname(os.path.realpath(__file__)), 'db.sqlite')
 
 
 migrate = Migrate(app, db, render_as_batch=True)
