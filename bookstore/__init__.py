@@ -13,7 +13,6 @@ from flask_script import Manager
 from werkzeug.exceptions import HTTPException
 from flask_login import LoginManager
 from itsdangerous import URLSafeSerializer
-
 # import psycopg2
 # import pymysql
 # import logging
@@ -101,9 +100,6 @@ login_manager.init_app(app)
 
 
 # Here we set session_token as our user_loader.
-@login_manager.user_loader
-def load_user(session_token):
-	return User.query.filter_by(session_token=session_token).first()
 
 from bookstore.client.views import client
 
