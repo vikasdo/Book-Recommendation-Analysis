@@ -2,72 +2,26 @@ body {
   background-color: #f3efee;
 }
 
-.intro,
-.credit {
+
+.intro, .credit {
   display: flex;
   flex-direction: row;
   justify-content: center;
   align-items: center;
-  font-family: "Monserrat", sans-serif;
+  font-family: 'Monserrat', sans-serif;
   color: #c07a95;
   margin: 5px;
   letter-spacing: 2px;
 }
-
 .credit a {
   text-decoration: none;
   margin: 5px;
 }
-
-.star-widget input {
-  display: none;
+.container {
+  display: flex;
+  justify-content: center;
+  flex-wrap: wrap;
 }
-
-.star-widget label {
-  font-size: 20px;
-  color: #444;
-  padding: 10px;
-  transition: all 0.2 ease;
-}
-
-input:not(:checked) ~ label:hover,
-input:not(:checked) ~ label:hover ~ label {
-  color: #fd4;
-}
-
-input:checked ~ label {
-  color: #fd4;
-}
-
-#rate-1:checked ~ .row header:before {
-  content: "I Loved it";
-}
-
-#rate-2:checked ~ .row header:before {
-  content: "Good Reading it";
-}
-
-#rate-3:checked ~ .row header:before {
-  content: "OkayISH..";
-}
-
-#rate-4:checked ~ .row header:before {
-  content: "Dissapointed..";
-}
-
-#rate-5:checked ~ .row header:before {
-  content: "I hate this ..";
-}
-
-input#rate-1:checked ~ label {
-  color: #fe7;
-  text-shadow: 0 0 20px #952;
-}
-
-.inactive {
-  display: none;
-}
-
 .item {
   min-width: 0;
   margin: 5px;
