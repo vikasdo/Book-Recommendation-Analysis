@@ -2,15 +2,17 @@
 
 
 {% block content %}
-<div class="col-lg-6 offset-3">
-<form action="/register" method="POST">
-	<input type="text" name="username"><br>
-	<input type="text" name="pwd"><br>
-		<input type="text" name="age"><br>
 
-	<input type="submit" name="submit-btn" value="submit">
-	
-</form>
+
+<div class="col-lg-6" style="background-color: #f5f5f5">
+	<h2 class="text-center p-2">Signup</h2>
+	<form class="form-group" action="/register" method="POST">
+
+		<input class="form-control p-2" type="email" name="email" placeholder="Enter Your Email"><br>
+		<input class="form-control p-2" type="text" name="username" placeholder="Enter Your Username"><br>
+		<input class="form-control p-2" type="text" name="password" placeholder="Enter your password"><br>
+		<input type="submit" class="btn btn-block btn-dark" name="submit-btn" value="Login">
+	</form>
 </div>
 
 
