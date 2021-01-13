@@ -11,7 +11,7 @@ class BaseConfig(object):
     ENV="develpoment"
     
     SQLALCHEMY_TRACK_MODIFICATIONS = False
-    SQLALCHEMY_ECHO = False
+    SQLALCHEMY_ECHO = True
 
  
 
@@ -22,7 +22,6 @@ class BaseConfig(object):
  
 
 
-H_FORCE = False
 
 
 class DevelopmentConfig(BaseConfig):
@@ -34,5 +33,6 @@ class DevelopmentConfig(BaseConfig):
 
     # For using SQLite3 databast
     SQLITE_DB_DIR = os.path.join( os.path.dirname(os.path.realpath(__file__)), 'db.sqlite')
+    print(SQLITE_DB_DIR)
     SQLALCHEMY_DATABASE_URI = "sqlite:///"+SQLITE_DB_DIR
-    SQLALCHEMY_ECHO = False
+    SQLALCHEMY_ECHO = True
