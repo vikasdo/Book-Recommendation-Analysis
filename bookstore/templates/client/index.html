@@ -8,7 +8,7 @@
     
     <div class="card m-3 shadow">
         <div class="card-img-top">
-            <img src="solar.jpg" class="img img-fluid" alt="Something to Show" style="width:300px;height: 200px;">
+            <img src="{{ url_for('static',filename='styles.css') }}" class="img img-fluid" alt="Something to Show" style="width:300px;height: 200px;">
         </div>
         <div class="card-body">
             <div class="card-title">
@@ -20,7 +20,7 @@
 
                 </p>
                 </div>
-                <a href="single.html" class="btn btn-outline-success stretched-link">View Product</a>
+                <a href="{{ url_for('single_product') }}" class="btn btn-outline-success stretched-link">View Product</a>
             </div>
         </div>
     </div>

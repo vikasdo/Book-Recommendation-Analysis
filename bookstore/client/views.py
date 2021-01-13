@@ -58,6 +58,13 @@ def register():
         return render_template('client/signup.html')
 
 
+@app.route('/single_product',methods = ['GET','POST'])
+@login_required
+def single_product():
+    if request.method == 'POST':
+        
+    return render_template('client/single.html')
+
 
 @app.route('/logout')
 @login_required
