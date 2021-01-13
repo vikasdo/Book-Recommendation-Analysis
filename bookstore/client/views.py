@@ -13,8 +13,7 @@ from bookstore import db, serializer, app
 
 client = Blueprint('client', __name__)
 
-@app.route('/home')
-@login_required
+@app.route('/')
 def home():
     return  render_template("client/index.html")
 
