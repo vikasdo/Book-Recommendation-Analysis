@@ -1,8 +1,3 @@
-from __future__ import absolute_import
-
-SUCCESS = 0
-ERROR = 1
-UNKNOWN_ERROR = 2
-VIRTUALENV_NOT_FOUND = 3
-PREVIOUS_BUILD_DIR_ERROR = 4
-NO_MATCHES_FOUND = 23
+version https://git-lfs.github.com/spec/v1
+oid sha256:17ab831ba1a3ed134a4095039ddf3b40aa88d7a52cfadf81d303c5ff840ca567
+size 156

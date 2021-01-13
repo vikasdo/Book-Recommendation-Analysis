@@ -1,17 +1,3 @@
-
-Flask==1.0.2
-
-# Flask Packages
-Flask-Login==0.4.0
-Flask-Migrate==2.0.2
-Flask-Script==2.0.5
-Flask-SQLAlchemy==2.4.0
-Flask-WTF==0.14.2
-Flask-User==1.0.1.5
-flask_basicauth
-flask_cors
-
-
-# Automated tests
-pytest==3.0.5
-pytest-cov==2.4.0
+version https://git-lfs.github.com/spec/v1
+oid sha256:2959b0d106aeb92a4cf0382dd23fe09ffa4174b0b6b3e2c51a70a98aa4cfd182
+size 232

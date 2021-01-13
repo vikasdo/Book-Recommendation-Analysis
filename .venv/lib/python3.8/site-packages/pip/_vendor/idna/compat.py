@@ -1,12 +1,3 @@
-from .core import *
-from .codec import *
-
-def ToASCII(label):
-    return encode(label)
-
-def ToUnicode(label):
-    return decode(label)
-
-def nameprep(s):
-    raise NotImplementedError("IDNA 2008 does not utilise nameprep protocol")
-
+version https://git-lfs.github.com/spec/v1
+oid sha256:47e876f43fba9ab9c9cdb5f1ca6ad6516ee2654bf2fb6e934306748a3e7b8b85
+size 232

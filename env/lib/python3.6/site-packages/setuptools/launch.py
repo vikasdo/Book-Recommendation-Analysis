@@ -1,35 +1,3 @@
-"""
-Launch the Python script on the command line after
-setuptools is bootstrapped via import.
-"""
-
-# Note that setuptools gets imported implicitly by the
-# invocation of this script using python -m setuptools.launch
-
-import tokenize
-import sys
-
-
-def run():
-    """
-    Run the script in sys.argv[1] as if it had
-    been invoked naturally.
-    """
-    __builtins__
-    script_name = sys.argv[1]
-    namespace = dict(
-        __file__=script_name,
-        __name__='__main__',
-        __doc__=None,
-    )
-    sys.argv[:] = sys.argv[1:]
-
-    open_ = getattr(tokenize, 'open', open)
-    script = open_(script_name).read()
-    norm_script = script.replace('\\r\\n', '\\n')
-    code = compile(norm_script, script_name, 'exec')
-    exec(code, namespace)
-
-
-if __name__ == '__main__':
-    run()
+version https://git-lfs.github.com/spec/v1
+oid sha256:b1dede8f0841a1c083c7fc06f6b22cd0e699f07b6698553c642e8847f4b42ef8
+size 787
