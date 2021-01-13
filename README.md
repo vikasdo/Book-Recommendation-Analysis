@@ -1,20 +1,3 @@
-# Book-Recommendation-Analysis
-*
-python3 -m venv env
-
- source env/bin/activate
- pip install -r requirements.txt
-
-python main.py
-
-
-
-*
- python manager.py db init
- python manager.py db migratesudo 
- python manager.py db upgrade
-*
-
-Templates path : ./bookstore/templates
-
-``
+version https://git-lfs.github.com/spec/v1
+oid sha256:3c892dad28257a0061127a773c6c6706c7d27c06803bfa0eae92d385b54bd420
+size 271

@@ -1,8 +1,3 @@
-# Shim to wrap setup.py invocation with setuptools
-SETUPTOOLS_SHIM = (
-    "import setuptools, tokenize;__file__=%r;"
-    "f=getattr(tokenize, 'open', open)(__file__);"
-    "code=f.read().replace('\\r\\n', '\\n');"
-    "f.close();"
-    "exec(compile(code, __file__, 'exec'))"
-)
+version https://git-lfs.github.com/spec/v1
+oid sha256:d1b95fb1c98d256fe26790dcb3025e0c1fcf6ed4c48df2bd44bd51d561035b61
+size 278

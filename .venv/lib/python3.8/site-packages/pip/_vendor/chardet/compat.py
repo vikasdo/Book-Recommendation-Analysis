@@ -1,34 +1,3 @@
-######################## BEGIN LICENSE BLOCK ########################
-# Contributor(s):
-#   Dan Blanchard
-#   Ian Cordasco
-#
-# This library is free software; you can redistribute it and/or
-# modify it under the terms of the GNU Lesser General Public
-# License as published by the Free Software Foundation; either
-# version 2.1 of the License, or (at your option) any later version.
-#
-# This library is distributed in the hope that it will be useful,
-# but WITHOUT ANY WARRANTY; without even the implied warranty of
-# MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the GNU
-# Lesser General Public License for more details.
-#
-# You should have received a copy of the GNU Lesser General Public
-# License along with this library; if not, write to the Free Software
-# Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA
-# 02110-1301  USA
-######################### END LICENSE BLOCK #########################
-
-import sys
-
-
-if sys.version_info < (3, 0):
-    PY2 = True
-    PY3 = False
-    base_str = (str, unicode)
-    text_type = unicode
-else:
-    PY2 = False
-    PY3 = True
-    base_str = (bytes, str)
-    text_type = str
+version https://git-lfs.github.com/spec/v1
+oid sha256:3ca4f31e449bb5b1c3a92f4fcae8cc6d7ef8ab56bc98ca5e4130d5b10859311c
+size 1134
