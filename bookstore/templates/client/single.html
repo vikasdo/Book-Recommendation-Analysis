@@ -6,8 +6,8 @@
             <img src="{{ url_for('static',filename='solar.jpg') }}" class="img img-fluid" alt="SOS">
         </div>
         <div class="col-lg-6 text-center">
-            <h6>Title: Working of Solar Panel</h6><br>
-            <h6>Subject : Design and Electronics</h6><br>
+            <b>Title: </b> <span id="item-name">Shoes</span><br>
+            <b>Subject: </b><span id="item-subject">Design and Clothing</span><br>
             <div class="d-flex row justify-content-center">
             <div class="d-flex star-widget flex-row-reverse justify-content-center">
                 <input type="radio" name="rate" id="rate-1" value="5" ><label for="rate-1"  class="fa fa-star"></label>
@@ -26,10 +26,11 @@
                 
             </div>
             </div><br>
-            <h6>Price : 200$</h6><br>
-            <h6>Status : In Stock</h6><br>
-            <div style="display: inline-block;">
-                <a href="#" class="btn btn-info">Add to Cart</a>
+            <b>Price: </b> <span id="item-price">200</span>$ <br>
+            <b>Status: </b><span id="item-status">In Stock</span><br><br>
+            <div style="display:block;">
+                <input type="number" id="item-value" class="mr-1" value="1" min=1 max=4>
+                <a href="#!" id="add-to-cart" class="btn btn-info">Add to Cart</a>
             </div>
 
         </div>

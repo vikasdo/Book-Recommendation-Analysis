@@ -6,7 +6,7 @@
 <div class="d-flex justify-content-center">
 <div class="col-lg-6" style="background-color: #f5f5f5">
 	<h2 class="text-center p-2">Signup</h2>
-	<form class="form-group" action="/register" method="POST">
+	<form class="form-group" action="{{ url_for('register') }}" method="POST">
 
 		<input class="form-control p-2" type="email" name="email" placeholder="Enter Your Email"><br>
 		<input class="form-control p-2" type="text" name="username" placeholder="Enter Your Username"><br>
