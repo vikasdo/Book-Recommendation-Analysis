@@ -1,3 +1,8 @@
-version https://git-lfs.github.com/spec/v1
-oid sha256:7315938e858dc6fa24578a7d1e705bcb25a57e07c918192e892e02c72cfbc9bd
-size 288
+#!/home/codespace/workspace/Book-Recommendation-Analysis/.venv/bin/python3.8
+# -*- coding: utf-8 -*-
+import re
+import sys
+from setuptools.command.easy_install import main
+if __name__ == '__main__':
+    sys.argv[0] = re.sub(r'(-script\.pyw|\.exe)?$', '', sys.argv[0])
+    sys.exit(main())
