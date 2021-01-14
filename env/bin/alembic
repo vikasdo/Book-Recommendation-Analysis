@@ -1,3 +1,11 @@
-version https://git-lfs.github.com/spec/v1
-oid sha256:fccf75c9e33b580ba4029932857cab6207fe2bfc28401a551ef7495e4f5e1743
-size 257
+#!/home/vikas/Book-Recommendation-Analysis/env/bin/python3
+
+# -*- coding: utf-8 -*-
+import re
+import sys
+
+from alembic.config import main
+
+if __name__ == '__main__':
+    sys.argv[0] = re.sub(r'(-script\.pyw?|\.exe)?$', '', sys.argv[0])
+    sys.exit(main())
