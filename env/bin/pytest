@@ -1,3 +1,11 @@
-version https://git-lfs.github.com/spec/v1
-oid sha256:403860cb15fb3d3a6ea1580d8a4a8a28833a9221ee3a9711e11e3f7c7f9e9e32
-size 249
+#!/home/vikas/Book-Recommendation-Analysis/env/bin/python3
+
+# -*- coding: utf-8 -*-
+import re
+import sys
+
+from pytest import main
+
+if __name__ == '__main__':
+    sys.argv[0] = re.sub(r'(-script\.pyw?|\.exe)?$', '', sys.argv[0])
+    sys.exit(main())

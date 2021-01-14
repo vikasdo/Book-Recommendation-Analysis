@@ -1,3 +1,11 @@
-version https://git-lfs.github.com/spec/v1
-oid sha256:8cc6e8bf9c63896a86e3d0b46ceb9ffe48b6e093e38ef812faad08d44b8a57d3
-size 252
+#!/home/vikas/Book-Recommendation-Analysis/env/bin/python3
+
+# -*- coding: utf-8 -*-
+import re
+import sys
+
+from flask.cli import main
+
+if __name__ == '__main__':
+    sys.argv[0] = re.sub(r'(-script\.pyw?|\.exe)?$', '', sys.argv[0])
+    sys.exit(main())
