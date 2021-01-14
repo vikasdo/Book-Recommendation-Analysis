@@ -93,10 +93,6 @@ serializer = URLSafeSerializer(app.secret_key)
 
 
 
-# Creating login_manager object of LoginManager class for implementing Flask-Login
-login_manager = LoginManager(app)
-login_manager.login_view = 'login'
-login_manager.init_app(app)
 
 
 # Here we set session_token as our user_loader.

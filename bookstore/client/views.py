@@ -62,7 +62,7 @@ def register():
 @login_required
 def single_product():
     if request.method == 'POST':
-        
+        pass
     return render_template('client/single.html')
 
 
