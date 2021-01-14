@@ -84,3 +84,28 @@ input#rate-1:checked ~ label {
 .item:hover {
   transform: scale(0.9);
 }
+
+.spinner-1:before{
+  content:'';
+  box-sizing: border-box;
+  position: absolute;
+  top:50%;
+  left: 50%;
+  height: 60px;
+  width: 60px;
+  margin-top: -30px;
+  margin-left: -30px;
+  border-radius: 50%;
+  border:4px solid transparent;
+  border-top-color: coral;
+  border-bottom-color: #8a2be2; 
+  border-left-color: yellow;
+  border-right-color:blue;
+  animation: spinner 0.7s linear infinite;
+}
+
+@keyframes spinner{
+  to{
+    transform:rotate(360deg);
+  }
+}
