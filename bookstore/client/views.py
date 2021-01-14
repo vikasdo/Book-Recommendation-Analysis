@@ -32,10 +32,8 @@ def login():
 
         email = request.form['email']
         password = request.form['password']
-        print('Logged in..')
 
         ok = User.query.filter_by(email=email).first()
-
         login_user(ok)
         return redirect(url_for('home'))
         
@@ -45,7 +43,6 @@ def login():
 @app.route('/register' , methods = ['GET' , 'POST'])
 def register():
     if request.method == 'POST':
-
         username = request.form['username']
         email =request.form['email']
         password = request.form['password']
@@ -53,7 +50,7 @@ def register():
                         password=generate_password_hash(password, method='sha256'))
         db.session.add(new_user)
         db.session.commit()
-        return redirect(url_for('home'))
+        return redirect(url_for('login'))
     else:
         return render_template('client/signup.html')
 
@@ -62,18 +59,26 @@ def register():
 @login_required
 def single_product():
     if request.method == 'POST':
-        pass
+        pass    
     return render_template('client/single.html')
+
+
+@app.route('/myprofile')
+@login_required
+def myprofile():
+    return render_template('client/login.html')
+
+
 
 
 @app.route('/logout')
 @login_required
 def logout():
     logout_user()
-    return render_template('login.html')
+    return render_template('client/login.html')
 
 
 
 @login_manager.user_loader
 def load_user(user_id):
-    return User.query.filter_by(id=user_id).first()
+    return User.query.get(int(user_id))
