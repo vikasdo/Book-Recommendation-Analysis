@@ -1,3 +1,67 @@
-version https://git-lfs.github.com/spec/v1
-oid sha256:8c5ffed0e5453197ff227f2b7ce9afeffa961185822b1ca4786bfa07e7f7dc6c
-size 2964
+{% extends 'client/header.html' %}
+{% block content %}
+    <div class="col-lg-12 ">
+        <div class="row shadow p-3">
+        <div class="col-lg-4 p-4 " style="justify-content: center;">
+            <img src="{{ books.bookImage }}" class="img img-fluid" alt="SOS">
+        </div>
+        <div class="col-lg-6 text-center">
+            <b>Title: </b> <span id="item-name">{{books.title}}</span><br>
+            <b>Author: </b><span id="item-subject">{{books.author}}</span><br>
+            <b>Publisher: </b><span id="item-subject">{{books.publisher}}</span><br>
+            <div class="d-flex row justify-content-center">
+            <div class="d-flex star-widget flex-row-reverse justify-content-center">
+                <input type="radio" name="rate" id="rate-1" value="5" ><label for="rate-1"  class="fa fa-star"></label>
+                
+                <input type="radio" name="rate" id="rate-2" value="4"><label for="rate-2" class="fa fa-star"></label>
+                
+                <input type="radio" name="rate" id="rate-3" value="3"><label for="rate-3" class="fa fa-star"></label>
+                
+                <input type="radio" name="rate" id="rate-4" value="2"><label for="rate-4" class="fa fa-star"></label>
+                
+                <input type="radio" name="rate" id="rate-5" value="1"><label for="rate-5" class="fa fa-star"></label>
+
+                <div class="row m-1" style="font-weight: bold; width: 100%;">
+                    <header id="rating-review"></header>
+                </div>
+                
+            </div>
+            </div><br>
+            <b>Price: </b> <span id="item-price">{{books.book_cost}}</span>$ <br>
+            <b>Status: </b><span id="item-status">In Stock</span><br><br>
+            <div style="display:block;">
+                <input type="number" id="item-value" class="mr-1" value="1" min=1 max=4>
+                <a href="#!" id="add-to-cart" class="btn btn-info">Add to Cart</a>
+            </div>
+
+        </div>
+    </div>
+    </div>
+
+    <!-- Recommended -->
+
+    <div class="d-flex justify-content-center flex-wrap">
+        <h2 class="text-center">Checkout other Books ... </h2><br>    
+    {% for idx,rows in suggestedBooks.iterrows() %}
+    <div class="card m-3 shadow">
+        <div class="card-img-top">
+            <img src="{{ rows.imageUrlL }}" class="img img-fluid" alt="Something to Show" style="width:300px;height: 200px;">
+        </div>
+        <div class="card-body">
+            <div class="card-title">
+                <h4>{{rows.bookTitle}}</h4>
+                <div class="card-text">
+                <p>
+                    <b>author:</b> {{ rows.bookAuthor }}<br>
+                    <b>publisher:</b> {{ rows.publisher }}<br>
+                  <!--  <b>Price:</b> {{rows.book_cost}} $<br>-->
+                </p>
+                </div>
+                <a href="{{ url_for('single_product',bookid=rows.ISBN ) }}" class="btn btn-dark stretched-link">View Product</a>
+            </div>
+        </div>
+    </div>
+    {% endfor %}
+
+    </div>
+{% endblock %}

@@ -1,3 +1,15 @@
-version https://git-lfs.github.com/spec/v1
-oid sha256:7e356db7741300d5e5a4908ebf71daedde47fbbe8cc3348839a6fb4850fd4c49
-size 254
+# -*- coding: utf-8 -*-
+"""
+    flask.__main__
+    ~~~~~~~~~~~~~~
+
+    Alias for flask.run for the command line.
+
+    :copyright: 2010 Pallets
+    :license: BSD-3-Clause
+"""
+
+if __name__ == "__main__":
+    from .cli import main
+
+    main(as_module=True)
