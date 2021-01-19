@@ -26,20 +26,12 @@ class User(UserMixin, db.Model):
 
 class Books(db.Model):
 	bid = db.Column(db.Integer,primary_key=True)
-<<<<<<< HEAD
-	ISBN = db.Column(db.String(100),nullable=False)
-=======
 	ISBN = db.Column(db.String(10),nullable=False)
->>>>>>> 6e2965e1655c2a4423d75ac6e360b4d22b68cc28
 	title = db.Column(db.String(255),nullable=False)
 	author = db.Column(db.String(100),nullable=False)
 	publisher = db.Column(db.String(100),nullable=False)
 	book_cost = db.Column(db.String(100),nullable=False)
-<<<<<<< HEAD
 	pubDate = db.Column(db.String(20),nullable=False,default="2001")
-=======
-	pubDate = db.Column(db.DateTime,nullable=False,default=datetime.utcnow)
->>>>>>> 6e2965e1655c2a4423d75ac6e360b4d22b68cc28
 	bookImage = db.Column(db.String(500),nullable=False)
 
 	def __repr__(self):
