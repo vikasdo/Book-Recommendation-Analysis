@@ -96,8 +96,6 @@ def addBook():
 
     return render_template('client/adminBook.html')
 
-
-<<<<<<< HEAD
 @app.route('/single_product/<string:bookid>',methods = ['GET','POST'])
 @login_required
 def single_product(bookid):
@@ -106,63 +104,31 @@ def single_product(bookid):
     print(current_user.id)
 
     user_id=current_user.id;
-=======
-@app.route('/single_product/<int:bookid>',methods = ['GET','POST'])
-@login_required
-def single_product(bookid):
-    books = Books.query.get_or_404(bookid) 
-    #call to recommendation engine
-    print(current_user.id)
-
-    user_id=4017
->>>>>>> 6e2965e1655c2a4423d75ac6e360b4d22b68cc28
     pickle_file="filename.pickle"
     
     infile = open(pickle_file,'rb')
     pickled_data = pickle.load(infile)
-    print(pickled_data)
+    
     infile.close()
     out=None
     if user_id  not in pickled_data:
         Recommendation_engine_obj=Recommendation_engine()
         out=Recommendation_engine_obj.getRecommendedBooks(user_id)
         pickled_data[user_id]=out
-<<<<<<< HEAD
     else:
         out=pickled_data[user_id]
-        
-=======
-
-
-    else:
-        out=pickled_data[user_id]
-
-    # print(out)
-    for index, row in df.iterrows():
-        print(row[0], row[1])
->>>>>>> 6e2965e1655c2a4423d75ac6e360b4d22b68cc28
+       
     filename = "filename.pickle"
     outfile = open(filename,'wb')
     pickle.dump(pickled_data,outfile)
     outfile.close()
-<<<<<<< HEAD
-
-
-
     return render_template('client/single.html',books=books,suggestedBooks=out)
-=======
- 
-    return render_template('client/single.html',books=books,booksrecom=out)
->>>>>>> 6e2965e1655c2a4423d75ac6e360b4d22b68cc28
 
 
 @app.route('/myprofile')
 @login_required
 def myprofile():
     return render_template('client/login.html')
-
-
-
 
 @app.route('/logout')
 @login_required
