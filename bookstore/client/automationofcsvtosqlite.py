@@ -1,3 +1,30 @@
-version https://git-lfs.github.com/spec/v1
-oid sha256:565f5b5bec6f5abb1b84bd9f8106bb4a669133705bbaf66e170777ab3b792e1b
-size 1061
+import sqlite3
+conn = sqlite3.connect('/home/vikas/Book-Recommendation-Analysis/db.sqlite')
+c = conn.cursor()
+
+import pandas as pd
+
+path_for_pkl="/home/vikas/Downloads/rec_data.pkl"
+df_data=pd.read_pickle(path_for_pkl)
+print(df_data.head())
+li=(df_data.columns)#books
+li1=(df_data.index)#
+# load the data into a Pandas DataFrame
+users = pd.read_csv(r'/home/vikas/Downloads/BX-Users.csv', encoding= 'unicode_escape',low_memory=False,sep=';')
+books = pd.read_csv(r'/home/vikas/Downloads/BX_Books.csv', encoding= 'unicode_escape',low_memory=False,sep=';')
+
+users=users.loc[users['User-ID'].isin(li1)]
+print(users.columns)
+users.columns=['id','location','age']
+users['email']='test@gmail.com'
+users['name']='client'
+users['password']='foobar123'
+
+
+books=books.loc[books['ISBN'].isin(li)]
+books.columns=['ISBN','title','author','pubDate','publisher','d','da','bookImage']
+
+books.drop(['d', 'da'], axis=1, inplace=True)
+books['book_cost']=110
+users.to_sql('user', conn, if_exists='append', index = False)
+books.to_sql('books', conn, if_exists='append', index = False)
