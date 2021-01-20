@@ -6,7 +6,7 @@ from datetime import datetime
 # import pandas as pd
 import glob,json,re
 import os,pickle,collections
-from bookstore.models import User,Books
+from bookstore.models import User,Books,Ratings
 from bookstore import db, serializer, app
 from werkzeug.security import generate_password_hash
 from bookstore.client.recommendation_engine import Recommendation_engine
@@ -108,7 +108,7 @@ def single_product(bookid):
     
     infile = open(pickle_file,'rb')
     pickled_data = pickle.load(infile)
-    
+
     infile.close()
     out=None
     if user_id  not in pickled_data:
