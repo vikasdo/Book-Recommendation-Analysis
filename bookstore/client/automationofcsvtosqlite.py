@@ -13,13 +13,16 @@ li1=(df_data.index)#
 users = pd.read_csv(r'/home/vikas/Downloads/BX-Users.csv', encoding= 'unicode_escape',low_memory=False,sep=';')
 books = pd.read_csv(r'/home/vikas/Downloads/BX_Books.csv', encoding= 'unicode_escape',low_memory=False,sep=';')
 
+
+
+email_list = ['test'+str(i)+'@gmail.com' for i in range(1,58) ]
+
 users=users.loc[users['User-ID'].isin(li1)]
 print(users.columns)
 users.columns=['id','location','age']
-users['email']='test@gmail.com'
+users['email']= 'test@gmail.com'
 users['name']='client'
 users['password']='foobar123'
-
 
 books=books.loc[books['ISBN'].isin(li)]
 books.columns=['ISBN','title','author','pubDate','publisher','d','da','bookImage']
