@@ -37,23 +37,32 @@
         </div>
     </div>
     </div>
-    <!-- Recommended -->
 
+<!-- Hidden Items -->
+<span data-userID='{{current_user.id}}' ></span>
+
+    <!-- Recommended -->
+<h2 class="py-4">Checkout other Books ... </h2>  
     <div class="d-flex justify-content-center flex-wrap">
-        <h2 class="text-center">Checkout other Books ... </h2><br>    
+          
     {% for idx,rows in suggestedBooks.iterrows() %}
-    <div class="card m-3 shadow">
+    <div class="card shadow bg-sucess">
         <div class="card-img-top">
             <img src="{{ rows.imageUrlL }}" class="img img-fluid" alt="Something to Show" style="width:300px;height: 200px;">
         </div>
         <div class="card-body">
             <div class="card-title">
                 <h4>{{rows.bookTitle}}</h4>
+            </div>
                 <div class="card-text">
-                <div class="d-flex flex-">
-                <p>
-                    <b>author:</b> {{ rows.bookAuthor }}<br>
-                    <b>publisher:</b> {{ rows.publisher }}<br>
+                <p style="font-size:6vw">
+
+                    <div class="book-author">
+                        <b>author:</b> {{ rows.bookAuthor }}<br>
+                    </div>
+                    <div class="book-publisher">
+                        <b>publisher:</b> {{ rows.publisher }}<br>
+                    </div>
                   <!--  <b>Price:</b> {{rows.book_cost}} $<br>-->
                 </p>
                 </div>
