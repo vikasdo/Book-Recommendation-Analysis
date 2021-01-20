@@ -99,6 +99,35 @@ def addBook():
 @app.route('/single_product/<string:bookid>',methods = ['GET','POST'])
 @login_required
 def single_product(bookid):
+
+
+    if request.method=='POST':
+
+        user_id=request.form.get('user_id')
+        user_rating= request.form.get('user_rating')
+        book_id = request.form.get('book_id')
+
+        es=len(book_id)
+
+        if(book_id[es-1]=='!' and book_id[es-2]=='#'):
+            book_id=book_id[:es-2]
+
+        print(book_id)
+
+        ok = Ratings.query.filter_by(user_id=user_id).first();
+
+        if not ok: 
+
+            red = Ratings(user_id=user_id,rating=user_rating,book_id=book_id)
+            db.session.add(red)
+            db.session.commit();
+
+        else:
+            ok.rating=user_rating
+
+        print(Ratings.query.all())
+       
+
     books = Books.query.filter_by(ISBN=bookid).first() 
     #call to recommendation engine
     print(current_user.id)
@@ -106,10 +135,9 @@ def single_product(bookid):
     user_id=current_user.id;
     pickle_file="filename.pickle"
     
-    infile = open(pickle_file,'rb')
-    pickled_data = pickle.load(infile)
+    with open(pickle_file,'rb') as infile:
+        pickled_data = pickle.load(infile)
 
-    infile.close()
     out=None
     if user_id  not in pickled_data:
         Recommendation_engine_obj=Recommendation_engine()
