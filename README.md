@@ -4,12 +4,17 @@ https://github.com/vikasdo/Book-Recommendation-Analysis/edit/main/README.md
 
 # colab
 	https://colab.research.google.com/drive/1W3bnFPMFdxa1ExdYQxuYv43k5QzFrG10
-	
+	https://colab.research.google.com/drive/18xQP5b_7MjMGtxNl-2XgHtH589J69B-K
 # To Setup 
 
  	 1. Actvate virtual environment
   	git lfs clone url 
+	python -m venv env
+	env\Scripts\activate
+	
   	pip install -r requirements.txt
+	python main.py
+	
 # To run 
 	Activate 
 	source env/bin/activate
