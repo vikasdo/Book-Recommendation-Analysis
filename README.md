@@ -1,7 +1,6 @@
 # document
 
-https://github.com/vikasdo/Book-Recommendation-Analysis/edit/main/README.md
-
+	[Link](https://drive.google.com/file/d/1FVmYuzC4w2Y5NCbkwcFeAj63uOSMGTZz/view?usp=sharing)
 # colab
 	https://colab.research.google.com/drive/1W3bnFPMFdxa1ExdYQxuYv43k5QzFrG10
 	https://colab.research.google.com/drive/18xQP5b_7MjMGtxNl-2XgHtH589J69B-K
