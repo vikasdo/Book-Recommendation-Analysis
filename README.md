@@ -31,5 +31,5 @@ python manager.py db migrate
 python manager.py db upgrade
 ```
 # Scan the Below QR to visit website 
-![QR](https://github.com/vikasdo/Book-Recommendation-Analysis/blob/main/bookstore/static/qrcode_booklystore.herokuapp.com.png){:height="200px" width="200px"}
+![QR](https://github.com/vikasdo/Book-Recommendation-Analysis/blob/main/bookstore/static/qrcode_booklystore.herokuapp.com.jpg?raw=true)
 
