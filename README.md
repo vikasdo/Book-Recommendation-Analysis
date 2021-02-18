@@ -1,7 +1,7 @@
 # document
 
-[Link to docs](https://drive.google.com/file/d/1tqAixFSWiZiUiY9Yk6qspmzdvjxyqrlM/view?usp=drivesdk
-# colab
+[Link to docs](https://drive.google.com/file/d/1tqAixFSWiZiUiY9Yk6qspmzdvjxyqrlM/view?usp=drivesdk)
+
 https://colab.research.google.com/drive/1W3bnFPMFdxa1ExdYQxuYv43k5QzFrG10
 https://colab.research.google.com/drive/18xQP5b_7MjMGtxNl-2XgHtH589J69B-K
 # To Setup 
