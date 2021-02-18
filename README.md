@@ -29,5 +29,6 @@ https://colab.research.google.com/drive/18xQP5b_7MjMGtxNl-2XgHtH589J69B-K
 python manager.py db init
 python manager.py db migrate
 python manager.py db upgrade
-
 ```
+# Scan the Below QR to visit website 
+
