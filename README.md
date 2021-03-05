@@ -34,7 +34,7 @@ python manager.py db upgrade
 ```
 # Website Demo
 <p> 
-	<h2>USER SITE</h2> 
+	<h2>CUSTOMER SITE</h2> 
 	<img src="bookstore/S1.gif" width="80%" height="90%"/>
 	<h2>RETAILER SITE</h2>
 	<img src="bookstore/S2.gif" width="80%" height="90%"/>
