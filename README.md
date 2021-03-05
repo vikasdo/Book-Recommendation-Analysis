@@ -32,6 +32,16 @@ python manager.py db init
 python manager.py db migrate
 python manager.py db upgrade
 ```
+# Website Demo
+<p> 
+	<h2>USER SITE</h2> 
+	<img src="bookstore/S1.gif" width="80%" height="90%"/>
+	<h2>RETAILER SITE</h2>
+	<img src="bookstore/S2.gif" width="80%" height="90%"/>
+	<img src="bookstore/S3.gif" width="80%" height="90%"/>
+	
+</p>
+
 # Scan the Below QR to visit website 
 ![QR](https://github.com/vikasdo/Book-Recommendation-Analysis/blob/main/bookstore/static/qrcode_booklystore.herokuapp.com.jpg?raw=true)
 
