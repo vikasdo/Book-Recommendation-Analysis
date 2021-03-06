@@ -43,8 +43,6 @@ python manager.py db upgrade
 	
 </p>
 
-# Scan the Below QR to visit website 
-![QR](https://github.com/vikasdo/Book-Recommendation-Analysis/blob/main/bookstore/static/qrcode_booklystore.herokuapp.com.jpg?raw=true)
 
 # Contribution Guidelines🏗
 
