@@ -58,6 +58,8 @@ def register():
         username = request.form['username']
         email =request.form['email']
         password = request.form['password']
+        location = request.form['location']
+        age = request.form['age']
 
         ok = User.query.filter_by(email=email).first()
 
@@ -66,7 +68,7 @@ def register():
             return redirect(url_for('login'))
 
         new_user =  User(name=username,email=email,
-                        password=generate_password_hash(password, method='sha256'))
+                        password=generate_password_hash(password, method='sha256'), location = location, age = age)
         db.session.add(new_user)
         db.session.commit()
         flash(f'Account Created for {username}','success')
