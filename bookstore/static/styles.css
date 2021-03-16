@@ -1,0 +1,119 @@
+@import url('https://fonts.googleapis.com/css2?family=Dancing+Script:wght@700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Varela+Round&display=swap');
+
+body {
+  background-color: #f3efee;
+}
+
+nav .logo{
+  font-family: 'Varela Round', sans-serif;
+  padding-left: 20px;
+  font-size: 60px;
+}
+
+.intro,
+.credit {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  font-family: "Monserrat", sans-serif;
+  color: #c07a95;
+  margin: 5px;
+  letter-spacing: 2px;
+}
+.credit a {
+  text-decoration: none;
+  margin: 5px;
+}
+
+.star-widget input {
+  display: none;
+}
+
+.star-widget label {
+  font-size: 20px;
+  color: #444;
+  padding: 10px;
+  transition: all 0.2 ease;
+}
+
+input:not(:checked) ~ label:hover,
+input:not(:checked) ~ label:hover ~ label {
+  color: #fd4;
+}
+
+input:checked ~ label {
+  color: #fd4;
+}
+
+#rate-1:checked ~ .row header:before {
+  content: "I Loved it";
+}
+
+#rate-2:checked ~ .row header:before {
+  content: "Good Reading it";
+}
+
+#rate-3:checked ~ .row header:before {
+  content: "OkayISH..";
+}
+
+#rate-4:checked ~ .row header:before {
+  content: "Dissapointed..";
+}
+
+#rate-5:checked ~ .row header:before {
+  content: "I hate this ..";
+}
+
+input#rate-1:checked ~ label {
+  color: #fe7;
+  text-shadow: 0 0 20px #952;
+}
+
+.inactive {
+  display: none;
+}
+
+.item {
+  min-width: 0;
+  margin: 5px;
+  transition: 0.8s ease;
+  box-shadow: 5px 5px 10px 2px #cccccc;
+}
+
+.item img {
+  width: 450px;
+  max-height: 210px;
+  max-width: 100%;
+}
+
+.item:hover {
+  transform: scale(0.9);
+}
+
+.spinner-1:before{
+  content:'';
+  box-sizing: border-box;
+  position: absolute;
+  top:50%;
+  left: 50%;
+  height: 60px;
+  width: 60px;
+  margin-top: -30px;
+  margin-left: -30px;
+  border-radius: 50%;
+  border:4px solid transparent;
+  border-top-color: coral;
+  border-bottom-color: #8a2be2; 
+  border-left-color: yellow;
+  border-right-color:blue;
+  animation: spinner 0.7s linear infinite;
+}
+
+@keyframes spinner{
+  to{
+    transform:rotate(360deg);
+  }
+}
