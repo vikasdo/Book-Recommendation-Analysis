@@ -3,6 +3,7 @@ from flask import render_template, url_for, request, redirect, flash, session, j
 from flask_login import login_required, current_user, login_user, logout_user,login_manager,LoginManager
 from werkzeug.security import check_password_hash
 from datetime import datetime
+from flask_mail import Mail, Message
 # import pandas as pd
 import glob,json,re
 import os,pickle,collections
@@ -19,6 +20,16 @@ client = Blueprint('client', __name__)
 login_manager = LoginManager(app)
 login_manager.login_view = 'login'
 login_manager.init_app(app)
+
+
+#flask mail config
+app.config["MAIL_DEFAULT_SENDER"] = "bookly2021@gmail.com"
+app.config["MAIL_PASSWORD"] = "foobar123"
+app.config["MAIL_PORT"] = 587
+app.config["MAIL_SERVER"] = "smtp.gmail.com"
+app.config["MAIL_USE_TLS"] = True
+app.config["MAIL_USERNAME"] = "Book.Ly"
+mail = Mail(app)
 
 
 @app.route('/')
@@ -69,6 +80,13 @@ def register():
                         password=generate_password_hash(password, method='sha256'))
         db.session.add(new_user)
         db.session.commit()
+        try:
+            message = Message("You are registered in Book.ly!!",
+                              sender='bookly2021@gmail.com', recipients=[email])
+            message.body = f"Hello,{username}. We from Book.ly welcome you. : )"
+            mail.send(message)
+        except:
+            flash(f'Error sending email to {email}.', 'error')
         flash(f'Account Created for {username}','success')
         return redirect(url_for('login'))
     else:
