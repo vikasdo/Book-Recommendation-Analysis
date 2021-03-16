@@ -1,4 +1,0 @@
-from .email_adapter_interface import EmailAdapterInterface
-from .smtp_email_adapter import SMTPEmailAdapter
-from .sendmail_email_adapter import SendmailEmailAdapter
-from .sendgrid_email_adapter import SendgridEmailAdapter
