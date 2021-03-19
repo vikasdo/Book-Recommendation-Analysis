@@ -129,3 +129,18 @@ git push -u origin <your_branch_name>
     <td align="center"><a href="https://github.com/vikasdo"><img src="https://avatars.githubusercontent.com/u/44545660?s=400&u=eeb8f17ce2c96e0e37b075b56218284a47589c40&v=4" width="100px;" alt=""/><br /><sub><b>Vikas</b></sub></a><br /></td>
   </tr>
 </table>
+
+# Contributors👨‍💻👩🏽‍💻
+
+#### Thanks to these wonderful people 🙌
+✨✨✨
+<table>
+	<tr>
+		<td>
+   <a href="https://github.com/vikasdo/Book-Recommendation-Analysis/graphs/contributors">
+  <img src="https://contrib.rocks/image?repo=vikasdo/Book-Recommendation-Analysis" />
+</a>
+		</td>
+	</tr>
+</table>
+✨✨✨
