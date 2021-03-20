@@ -1,4 +1,4 @@
-![logo](https://github.com/vikasdo/Book-Recommendation-Analysis/blob/main/bookstore/static/bookly.PNG)
+![logo](https://github.com/vikasdo/Book-Recommendation-Analysis/blob/main/bookstore/static/img/logo.PNG)
 
 # Theme approach ![](https://warehouse-camo.ingress.cmh1.psfhosted.org/582ab2eba9d0e0f4acbea2fd883f604349908147/68747470733a2f2f696d672e736869656c64732e696f2f707970692f707976657273696f6e732f74656e736f72666c6f772e7376673f7374796c653d706c6173746963)
 <img align="right" src="https://media.giphy.com/media/l0HlESqXkgB97Xs7C/giphy.gif" width = "200" height = "250">
