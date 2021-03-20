@@ -410,6 +410,7 @@ def forgotpwd():
                 mail.send(message)
             except:
                 flash(f"Error sending email to {email}")
+                return redirect(url_for("forgotpwd"))
             return redirect(url_for("otp"))
         else:
             flash("Email not found")
