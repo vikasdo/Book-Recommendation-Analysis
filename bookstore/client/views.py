@@ -14,6 +14,7 @@ from bookstore.client.recommendation_engine import Recommendation_engine
 # create A Blueprint
 import json
 import sqlite3
+import random
 #connection obj
 
 
@@ -388,3 +389,60 @@ def discounts():
     db.session.commit()
     flash(f'Discount Successfully Updated','success')
     return redirect(url_for('personalized_offers'))
+
+
+@app.route("/forgotpwd", methods=["POST", "GET"])
+def forgotpwd():
+    if request.method == "GET":
+        return render_template("client/forgot_password.html")
+    else:
+        email = request.form.get("email")
+        session["cli_email"] = email
+        usr_found = User.query.filter_by(email=email).first()
+        if usr_found is not None:
+            flash("otp sent to your email")
+            generated_otp = random.randint(1000, 9999)
+            session["generated_otp"] = generated_otp
+            try:
+                message = Message("Here is your Otp",
+                                  sender='bookly1120@gmail.com', recipients=[email])
+                message.body = f"Your otp is {generated_otp}"
+                mail.send(message)
+            except:
+                flash(f"Error sending email to {email}")
+            return redirect(url_for("otp"))
+        else:
+            flash("Email not found")
+            return redirect(url_for("forgotpwd"))
+
+
+@app.route("/otp", methods=["POST", "GET"])
+def otp():
+    if request.method == "POST":
+        get_otp = request.form.get("otp")
+        get_otp = int(get_otp)
+        if session["generated_otp"] == get_otp:
+            return redirect(url_for("changepwd"))
+        else:
+            flash("wrong otp")
+            return redirect(url_for("otp"))
+    else:
+        if 'cli_email' not in session:
+            return redirect(url_for("forgotpwd"))
+        return render_template("client/otp.html")
+
+
+@app.route("/changepwd", methods=["POST", "GET"])
+def changepwd():
+    if request.method == "POST":
+        usr_found = User.query.filter_by(email=session["cli_email"]).first()
+        new_pwd = request.form.get("newpwd")
+        usr_found.password = new_pwd
+        db.session.commit()
+        session.pop("cli_email", None)
+        flash("password updated, please login again")
+        return redirect(url_for("login"))
+    else:
+        if 'cli_email' not in session:
+            return redirect(url_for("forgotpwd"))
+        return render_template("client/changepwd.html")
