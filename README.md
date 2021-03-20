@@ -12,9 +12,6 @@ Now a days due to the Growth of Technology Everyone is able to make Buy items on
 https://colab.research.google.com/drive/1W3bnFPMFdxa1ExdYQxuYv43k5QzFrG10
 https://colab.research.google.com/drive/18xQP5b_7MjMGtxNl-2XgHtH589J69B-K
 
-# Demo Video
-[Click Here](https://drive.google.com/file/d/138YFG8sWrRJwtVqcWOFOt8Qin-ZQH7MX/view?usp=drivesdk)
-
 # To Setup 
 
  	 1. Actvate virtual environment
@@ -37,13 +34,12 @@ python manager.py db migrate
 python manager.py db upgrade
 ```
 # Website Demo
-<!--<p> 
-	<h3>CUSTOMER SITE</h3> 
-	<img src="bookstore/S1.gif" width="80%" height="90%"/>
-	<h3>RETAILER SITE</h3>
-	<img src="bookstore/S2.gif" width="80%" height="90%"/>
-	<img src="bookstore/S3.gif" width="80%" height="90%"/>
-</p>-->
+<h3>CUSTOMER SITE</h3> 
+<img src="bookstore/README_DEMO.gif" alt="Demo" width="80%" height="90%"/> 
+<h3>RETAILER SITE</h3>
+<img src="https://user-images.githubusercontent.com/68437435/111871736-bc854780-89b1-11eb-9614-455e615025ae.gif" alt="Demo" width="80%" height="90%"/>
+<img src="https://user-images.githubusercontent.com/68437435/111871719-a8414a80-89b1-11eb-87c0-0a3288a34add.gif" alt="Demo" width="80%" height="90%"/>
+</p>
 
 <h3>Scan the below QR to visit the Website</h3>
 <img src="https://github.com/vikasdo/Book-Recommendation-Analysis/blob/main/bookstore/static/img/qrcode_booklystore.herokuapp.com.png" width="200px" height="200px"/>
