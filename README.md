@@ -37,15 +37,17 @@ python manager.py db migrate
 python manager.py db upgrade
 ```
 # Website Demo
-<p> 
+<!--<p> 
 	<h3>CUSTOMER SITE</h3> 
 	<img src="bookstore/S1.gif" width="80%" height="90%"/>
 	<h3>RETAILER SITE</h3>
 	<img src="bookstore/S2.gif" width="80%" height="90%"/>
 	<img src="bookstore/S3.gif" width="80%" height="90%"/>
-	
-</p>
+</p>-->
 
+<h3>Scan the below QR to visit the Website</h3>
+<img src="https://drive.google.com/file/d/1ApgpFsJOXaHGtxu0YzJ_UyReviFItJyB/view?usp=sharing" width="200px" height="200px"/>
+<a href="https://booklystore.herokuapp.com/login">Bookly Store</a>
 
 # Contribution Guidelines🏗
 
