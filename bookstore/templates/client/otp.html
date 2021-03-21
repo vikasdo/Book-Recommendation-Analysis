@@ -5,6 +5,9 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta2/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-BmbxuPwQa2lc/FVzBcNJ7UAyJxM6wuqIj61tLrc4wSX0szH/Ev+nYRRuWlolflfl" crossorigin="anonymous">
+    <link rel="stylesheet" href="{{ url_for('static',filename='styles.css') }}">
     <title>BookLy</title>
 </head>
 
@@ -18,10 +21,13 @@
     {% endfor %}
     {% endif %}
     {% endwith %}
-    <form action="/otp" method="POST">
-        <p>Enter OTP sent to your email : </p><br>
+    <a href="{{url_for('home')}}" class="link-dark">
+        <font face="Comic sans MS" style="padding:2%" size=" 10">Book.ly</font>
+    </a>
+    <form action="/otp" style="text-align:center;padding:10%"  class="border border-warning" method="POST">
+        <h3>Enter OTP sent to your email : </h3>
         <input type="text" name="otp" placeholder="otp" maxlength="4">
-        <input type="submit">
+        <input type="submit" value="Submit" class="btn btn-outline-warning">
     </form>
 </body>
 
