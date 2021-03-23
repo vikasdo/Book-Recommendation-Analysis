@@ -17,7 +17,15 @@ import sqlite3
 import random
 #connection obj
 
-
+# for email validations added by arpit
+import re
+regex = '^[a-z0-9]+[\._]?[a-z0-9]+[@]\w+[.]\w{2,3}$'
+def check(email): 
+    if(re.search(regex,email)): 
+        return True  
+    else: 
+        return False
+# end
 client = Blueprint('client', __name__)
 
 
@@ -227,13 +235,30 @@ def register():
             flash('Existing User Login to continue...','error')
             return redirect(url_for('login'))
         # form validations for signup added by arpit
-        
+        if(check(email) == True):
+            pass
+        else:
+            flash('Email is not valid :( Please Try Again','error')
+            return redirect(url_for('register'))
+        if len(username) <=3 :
+            flash('Username length must be Greater than 3 ','error')
+            return redirect(url_for('register'))
+        else:
+            pass
+        if len(password) <=5 :
+            flash('Password length should be Greater than 5 ','error')
+            return redirect(url_for('register'))
+        else:
+            pass
+        if int(age) <=0:
+            flash("Age is not Valid!! Please Try agin..",'error')
+            return redirect(url_for('register'))
+        else:
+            pass
+        # I don't know why generate_password_hash  is not working properly
+        # password=generate_password_hash(password, method='sha256')
         new_user =  User(name=username,email=email,
                         password=password,location=location,age=age)
-        # I generate_password_hash password is not working properly
-        # new_user =  User(name=username,email=email,
-                        # password=generate_password_hash(password, method='sha256'),location=location,age=age)
-                             
         db.session.add(new_user)
         db.session.commit()
         try:
