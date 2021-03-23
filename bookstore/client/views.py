@@ -57,8 +57,14 @@ def helper():
     return User.query.filter_by(id=current_user.id).first(),transactions
 
 @app.route('/')
-@login_required
+# @login_required  becuase of this the message is not in red color i had done this manually by is_authenticated
 def home():
+    if current_user.is_authenticated:
+        # it means user is logged in
+        pass
+    else:
+        flash("Please Login to access this page!!","error")
+        return redirect(url_for("login"))
     transactions=[]
     conn = sqlite3.connect(app.config["SQLITE_DB_DIR"])
     cur = conn.execute('SELECT * FROM order_list WHERE user_id=(?)',(current_user.id,))
@@ -191,7 +197,6 @@ def dashboard():
 
 @app.route('/login' , methods=['GET' , 'POST'])
 def login():
-    
     if current_user.is_authenticated:
         flash('Already Logged in...','info')
         return redirect(url_for('home'))
@@ -203,19 +208,15 @@ def login():
         password = request.form['password']
 
         ok = User.query.filter_by(email=email).first()
-        print(ok.password,ok.email)
         if ok == None:
             flash("Email doesn't exit, Signup First...",'error')
             return redirect(url_for('register'))
         # form validations for login added by arpit
         elif str(ok.password) == (str(password)):
-            print('right password')
             login_user(ok)
             flash("Login Success :)",'success')
             return redirect(url_for('home'))
         else:
-            print('wrong password')
-            print(password)
             flash("Wrong password :(","error")
             return redirect(url_for("login"))
     return render_template('client/login.html')
@@ -255,7 +256,7 @@ def register():
             return redirect(url_for('register'))
         else:
             pass
-        # I don't know why generate_password_hash  is not working properly
+        #generate_password_hash  is not working properly
         # password=generate_password_hash(password, method='sha256')
         new_user =  User(name=username,email=email,
                         password=password,location=location,age=age)
@@ -265,7 +266,7 @@ def register():
             message = Message("You are registered in Book.ly!!",
                             sender='bookly1120@gmail.com', recipients=[email])
             message.body = f"Hello,{username}. We from Book.ly welcome you. : )"
-            # mail.send(message)
+            mail.send(message)
         except:
             flash(f'Error sending email to {email}.', 'error')
         flash(f'Account Created for {username}','success')
