@@ -183,7 +183,7 @@ def dashboard():
 
 @app.route('/login' , methods=['GET' , 'POST'])
 def login():
-
+    
     if current_user.is_authenticated:
         flash('Already Logged in...','info')
         return redirect(url_for('home'))
@@ -195,14 +195,21 @@ def login():
         password = request.form['password']
 
         ok = User.query.filter_by(email=email).first()
-        if ok is not None:
+        print(ok.password,ok.email)
+        if ok == None:
+            flash("Email doesn't exit, Signup First...",'error')
+            return redirect(url_for('register'))
+        # form validations for login added by arpit
+        elif str(ok.password) == (str(password)):
+            print('right password')
             login_user(ok)
             flash("Login Success :)",'success')
             return redirect(url_for('home'))
         else:
-            flash("Email doesn't exit, Signup First...",'error')
-            return redirect(url_for('register'))
-
+            print('wrong password')
+            print(password)
+            flash("Wrong password :(","error")
+            return redirect(url_for("login"))
     return render_template('client/login.html')
 
 @app.route('/register' , methods = ['GET' , 'POST'])
@@ -215,20 +222,25 @@ def register():
         location = request.form['location']
 
         ok = User.query.filter_by(email=email).first()
-
+        
         if ok:
             flash('Existing User Login to continue...','error')
             return redirect(url_for('login'))
-
+        # form validations for signup added by arpit
+        
         new_user =  User(name=username,email=email,
-                        password=generate_password_hash(password, method='sha256'),location=location,age=age)
+                        password=password,location=location,age=age)
+        # I generate_password_hash password is not working properly
+        # new_user =  User(name=username,email=email,
+                        # password=generate_password_hash(password, method='sha256'),location=location,age=age)
+                             
         db.session.add(new_user)
         db.session.commit()
         try:
             message = Message("You are registered in Book.ly!!",
                             sender='bookly1120@gmail.com', recipients=[email])
             message.body = f"Hello,{username}. We from Book.ly welcome you. : )"
-            mail.send(message)
+            # mail.send(message)
         except:
             flash(f'Error sending email to {email}.', 'error')
         flash(f'Account Created for {username}','success')
