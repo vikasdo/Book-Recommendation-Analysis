@@ -9,11 +9,11 @@
 	
 	<form class="form-group" action="{{ url_for('register') }}" method="POST">
 
-		<input class="form-control p-2" type="email" name="email" placeholder="Enter Your Email"><br>
-		<input class="form-control p-2" type="text" name="username" placeholder="Enter Your Username"><br>
-		<input class="form-control p-2" type="text" name="password" placeholder="Enter your password"><br>
-		<input class="form-control p-2" type="number" name="age" placeholder="Enter your Age"><br>
-		<input class="form-control p-2" type="text" name="location" placeholder="Enter your Location (Example : Niskayuna, New York, USA)"><br>
+		<input class="form-control p-2" type="email" name="email" placeholder="Enter Your Email" required><br>
+		<input class="form-control p-2" type="text" name="username" placeholder="Enter Your Username" required><br>
+		<input class="form-control p-2" type="password" name="password" placeholder="Enter your password" required><br>
+		<input class="form-control p-2" type="number" name="age" placeholder="Enter your Age" required><br>
+		<input class="form-control p-2" type="text" name="location" placeholder="Enter your Location (Example : Niskayuna, New York, USA)" required><br>
 		<input type="submit" class="btn btn-block btn-dark" name="submit-btn" value="Signup">
 	</form>
 </div>
