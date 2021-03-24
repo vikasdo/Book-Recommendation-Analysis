@@ -11,10 +11,8 @@ currently being supported with security updates.
 
 ## Reporting a Vulnerability
 
-Use this section to tell people how to report a vulnerability.
-
 ```
-If you encountered a security issue, create a new discussion regarding the issue in discussion section.
+<h1>If you encountered a security issue, create a new discussion regarding the issue in discussion section.
 Make sure to include the file path where the security issue is found.
-Keep disccsions healthy. 
+Keep disccsions healthy.</h1> 
 ```
