@@ -17,7 +17,7 @@ import sqlite3
 import random
 #connection obj
 
-# for email validations added by arpit
+# for email validations added by arpit jain
 import re
 regex = '^[a-z0-9]+[\._]?[a-z0-9]+[@]\w+[.]\w{2,3}$'
 def check(email): 
@@ -25,7 +25,7 @@ def check(email):
         return True  
     else: 
         return False
-# end
+# arpit code ended
 client = Blueprint('client', __name__)
 
 
@@ -58,7 +58,9 @@ def helper():
 
 @app.route('/')
 # @login_required  becuase of this the message is not in red color i had done this manually by is_authenticated
+
 def home():
+    #code added by arpit
     if current_user.is_authenticated:
         # it means user is logged in
         pass
@@ -197,6 +199,7 @@ def dashboard():
 
 @app.route('/login' , methods=['GET' , 'POST'])
 def login():
+    #added by arpit
     if current_user.is_authenticated:
         flash('Already Logged in...','info')
         return redirect(url_for('home'))
@@ -235,7 +238,7 @@ def register():
         if ok:
             flash('Existing User Login to continue...','error')
             return redirect(url_for('login'))
-        # form validations for signup added by arpit
+        # form validations for signup added by arpit jain
         if(check(email) == True):
             pass
         else:
