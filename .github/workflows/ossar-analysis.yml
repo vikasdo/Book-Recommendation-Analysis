@@ -42,4 +42,3 @@ jobs:
       uses: github/codeql-action/upload-sarif@v1
       with:
         sarif_file: ${{ steps.ossar.outputs.sarifFile }}
-        
