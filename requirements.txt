@@ -23,7 +23,7 @@ Jinja2==2.11.2
 joblib==1.0.0
 Mako==1.1.4
 MarkupSafe==1.1.1
-numpy==1.1.5
+numpy==1.19.5
 pandas==1.2.1
 passlib==1.7.4
 py==1.10.0
