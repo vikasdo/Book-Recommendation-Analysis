@@ -488,3 +488,32 @@ def changepwd():
         if 'cli_email' not in session:
             return redirect(url_for("forgotpwd"))
         return render_template("client/changepwd.html")
+
+@app.route("/contact", methods=["POST", "GET"])
+def contact():
+    return render_template("client/contact.html")
+
+@app.route("/", methods = ['GET', 'POST'])
+def contact():
+    if(request.method=='POST'):
+        name = request.form.get('name')
+        email = request.form.get('email')
+        contact = request.form.get('contact')
+        message = request.form.get('feedback')
+        print(name,email,contact,message)
+        #Contact should be same as name of line 32
+        entry = Contact(name=name, contact=contact,email = email, feedback=feedback, experience=experience, service=service )
+        db.session.add(entry)
+        db.session.commit()
+        mail.send_message('New message from ' + name,
+                          sender=email,
+                          recipients = [params['gmail-user']],
+                          body = name + "\n" + email + "\n" + contact + "\n" + message       
+                          )
+        mail.send_message('New message from ' + name,
+                          sender=params['gmail-user'],
+                          recipients = [email],
+                          body = "Thankyou for your feedback!"      
+                          )
+      
+    return render_template('contact.html')
