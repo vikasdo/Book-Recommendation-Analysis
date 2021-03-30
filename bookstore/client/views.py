@@ -7,7 +7,7 @@ from datetime import datetime
 import pandas as pd
 import glob,json,re
 import os,pickle,collections
-from bookstore.models import User,Books,Ratings,OrderList,offer
+from bookstore.models import User,Books,Ratings,OrderList,offer,Contact
 from bookstore import db, serializer, app
 from werkzeug.security import generate_password_hash
 from bookstore.client.recommendation_engine import Recommendation_engine
@@ -488,3 +488,28 @@ def changepwd():
         if 'cli_email' not in session:
             return redirect(url_for("forgotpwd"))
         return render_template("client/changepwd.html")
+
+@app.route("/contact", methods = ['GET', 'POST'])
+def contact():
+    if(request.method=='POST'):
+        name = request.form.get('name')
+        email = request.form.get('email')
+        contact = request.form.get('contact')
+        message = request.form.get('message')
+        #print(name,email,contact,message)
+        entry = Contact(name=name, contact=contact,email=email, message=message)
+        db.session.add(entry)
+        db.session.commit()
+        #print(Contact.query.all())
+        # mail.send_message('New message from ' + name,
+        #                   sender=email,
+        #                   recipients = <gmail-user>,
+        #                   body = name + "\n" + email + "\n" + contact + "\n" + message       
+        #                   )
+        # mail.send_message('New message from ' + name,
+        #                   sender= <gmail-user>,
+        #                   recipients = [email],
+        #                   body = "Thankyou for your feedback!"      
+        #                   )
+      
+    return render_template("client/contact.html",profile=helper()[0],transactions=helper()[1])

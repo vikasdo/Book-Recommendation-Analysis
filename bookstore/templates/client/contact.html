@@ -1,0 +1,53 @@
+{% extends 'client/header.html' %}
+{% block head %}
+   
+   <link href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-alpha.2/css/bootstrap.min.css" rel="stylesheet" type="text/css">
+<link href="{{ url_for('static', filename='css/contact.css') }}" rel="stylesheet" type="text/css">
+ <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>
+ 
+
+{% endblock head%}
+{% block content %}
+
+<div class="container">
+	<div class="row" style="display: block !important;">
+			<h1>contact us</h1>
+	</div>
+	<div class="row" style="display: block !important;">
+			<h4 style="text-align:center">We'd love to hear from you!</h4>
+	</div>
+	<form name="sentMessage" id="contact" action = "/contact" method="post" novalidate>
+	<div class="row input-container">
+			<div class="col-xs-12">
+				<div class="styled-input wide">
+					<input type="text" name="name" required />
+					<label>Name</label> 
+				</div>
+			</div>
+			<div class="col-md-6 col-sm-12">
+				<div class="styled-input">
+					<input type="email" name="email" required />
+					<label>Email</label> 
+				</div>
+			</div>
+			<div class="col-md-6 col-sm-12">
+				<div class="styled-input" style="float:right;">
+					<input type="tel" name="contact" required />
+					<label>Phone Number</label> 
+				</div>
+			</div>
+			<div class="col-xs-12">
+				<div class="styled-input wide">
+					<textarea name="message" required></textarea>
+					<label>Message</label>
+				</div>
+			</div>
+			<div class="col-xs-12">
+				<button class="btn-lrg submit-btn" type="submit">Send Message</button>
+			</div>
+
+	</div>
+	</form>
+</div>
+
+{% endblock content%}
