@@ -1,5 +1,8 @@
 {% extends 'client/header.html' %}
 
+{% block head %}
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.13.0/css/all.min.css">
+{% endblock head%}
 
 {% block content %}
 
@@ -8,11 +11,30 @@
 	<h2 class="text-center p-2">Login</h2>
 	<form class="form-group" action="/login" method="POST">
 		<!-- added required in both input by arpit -->
-		<input class="form-control p-2" type="email" name="email" placeholder="Enter Your Email" required><br>
-		<input class="form-control p-2" type="password" name="password" placeholder="Enter your password" required><br>
-		<input type="submit" class="btn btn-block btn-dark" name="submit-btn" value="Login">
+		<input class="form-control p-2" type="email" name="email" placeholder="Enter Your Email" style="width:98%" required><br>
+		<!-- <div> -->
+			<input class="form-control p-2" type="password" name="password" placeholder="Enter the password" id='password' style="display: inline-block;width:98%" required>
+			<span>
+			<i class="far fa-eye" id="togglePassword" style="margin-left: -30px; cursor: pointer;"></i>
+		</span>
+		<!-- </div> -->
+		<input type="submit" class="btn btn-block btn-dark" name="submit-btn" style="margin-top: 25px;" value="Login">
 		<a href="{{url_for('forgotpwd')}}">Forgot Password<a></a>
 	</form>
 </div>
+
+<script>
+	const togglePassword = document.querySelector('#togglePassword');
+const password = document.querySelector('#password');
+
+togglePassword.addEventListener('click', function (e) {
+    // toggle the type attribute
+    const type = password.getAttribute('type') === 'password' ? 'text' : 'password';
+    password.setAttribute('type', type);
+    // toggle the eye slash icon
+    this.classList.toggle('fa-eye-slash');
+});
+
+</script>
 
 {% endblock content %}
