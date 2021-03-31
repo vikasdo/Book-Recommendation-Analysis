@@ -7,7 +7,7 @@ from datetime import datetime
 import pandas as pd
 import glob,json,re
 import os,pickle,collections
-from bookstore.models import User,Books,Ratings,OrderList,offer
+from bookstore.models import User,Books,Ratings,OrderList,offer,Contact
 from bookstore import db, serializer, app
 from werkzeug.security import generate_password_hash
 from bookstore.client.recommendation_engine import Recommendation_engine
@@ -17,7 +17,15 @@ import sqlite3
 import random
 #connection obj
 
-
+# for email validations added by arpit jain
+import re
+regex = '^[a-z0-9]+[\._]?[a-z0-9]+[@]\w+[.]\w{2,3}$'
+def check(email): 
+    if(re.search(regex,email)): 
+        return True  
+    else: 
+        return False
+# arpit code ended
 client = Blueprint('client', __name__)
 
 
@@ -49,8 +57,16 @@ def helper():
     return User.query.filter_by(id=current_user.id).first(),transactions
 
 @app.route('/')
-@login_required
+# @login_required  becuase of this the message is not in red color i had done this manually by is_authenticated
+
 def home():
+    #code added by arpit
+    if current_user.is_authenticated:
+        # it means user is logged in
+        pass
+    else:
+        flash("Please Login to access this page!!","error")
+        return redirect(url_for("login"))
     transactions=[]
     conn = sqlite3.connect(app.config["SQLITE_DB_DIR"])
     cur = conn.execute('SELECT * FROM order_list WHERE user_id=(?)',(current_user.id,))
@@ -183,7 +199,7 @@ def dashboard():
 
 @app.route('/login' , methods=['GET' , 'POST'])
 def login():
-
+    #added by arpit
     if current_user.is_authenticated:
         flash('Already Logged in...','info')
         return redirect(url_for('home'))
@@ -195,14 +211,17 @@ def login():
         password = request.form['password']
 
         ok = User.query.filter_by(email=email).first()
-        if ok is not None:
+        if ok == None:
+            flash("Email doesn't exit, Signup First...",'error')
+            return redirect(url_for('register'))
+        # form validations for login added by arpit
+        elif str(ok.password) == (str(password)):
             login_user(ok)
             flash("Login Success :)",'success')
             return redirect(url_for('home'))
         else:
-            flash("Email doesn't exit, Signup First...",'error')
-            return redirect(url_for('register'))
-
+            flash("Wrong password :(","error")
+            return redirect(url_for("login"))
     return render_template('client/login.html')
 
 @app.route('/register' , methods = ['GET' , 'POST'])
@@ -215,13 +234,35 @@ def register():
         location = request.form['location']
 
         ok = User.query.filter_by(email=email).first()
-
+        
         if ok:
             flash('Existing User Login to continue...','error')
             return redirect(url_for('login'))
-
+        # form validations for signup added by arpit jain
+        if(check(email) == True):
+            pass
+        else:
+            flash('Email is not valid :( Please Try Again','error')
+            return redirect(url_for('register'))
+        if len(username) <=3 :
+            flash('Username length must be Greater than 3 ','error')
+            return redirect(url_for('register'))
+        else:
+            pass
+        if len(password) <=5 :
+            flash('Password length should be Greater than 5 ','error')
+            return redirect(url_for('register'))
+        else:
+            pass
+        if int(age) <=0:
+            flash("Age is not Valid!! Please Try agin..",'error')
+            return redirect(url_for('register'))
+        else:
+            pass
+        #generate_password_hash  is not working properly
+        # password=generate_password_hash(password, method='sha256')
         new_user =  User(name=username,email=email,
-                        password=generate_password_hash(password, method='sha256'),location=location,age=age)
+                        password=password,location=location,age=age)
         db.session.add(new_user)
         db.session.commit()
         try:
@@ -447,3 +488,28 @@ def changepwd():
         if 'cli_email' not in session:
             return redirect(url_for("forgotpwd"))
         return render_template("client/changepwd.html")
+
+@app.route("/contact", methods = ['GET', 'POST'])
+def contact():
+    if(request.method=='POST'):
+        name = request.form.get('name')
+        email = request.form.get('email')
+        contact = request.form.get('contact')
+        message = request.form.get('message')
+        #print(name,email,contact,message)
+        entry = Contact(name=name, contact=contact,email=email, message=message)
+        db.session.add(entry)
+        db.session.commit()
+        #print(Contact.query.all())
+        # mail.send_message('New message from ' + name,
+        #                   sender=email,
+        #                   recipients = <gmail-user>,
+        #                   body = name + "\n" + email + "\n" + contact + "\n" + message       
+        #                   )
+        # mail.send_message('New message from ' + name,
+        #                   sender= <gmail-user>,
+        #                   recipients = [email],
+        #                   body = "Thankyou for your feedback!"      
+        #                   )
+      
+    return render_template("client/contact.html",profile=helper()[0],transactions=helper()[1])
