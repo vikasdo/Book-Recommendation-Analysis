@@ -232,7 +232,10 @@ def register():
         email =request.form['email']
         password = request.form['password']
         age = request.form['age']
-        location = get_location()
+        try:
+            location = get_location()
+        except:
+            location = "default location"
 
         ok = User.query.filter_by(email=email).first()
 
