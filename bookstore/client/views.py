@@ -8,6 +8,7 @@ import pandas as pd
 import glob,json,re
 import os,pickle,collections
 from bookstore.models import User,Books,Ratings,OrderList,offer,Contact
+from bookstore.location import get_location
 from bookstore import db, serializer, app
 from werkzeug.security import generate_password_hash
 from bookstore.client.recommendation_engine import Recommendation_engine
@@ -20,10 +21,10 @@ import random
 # for email validations added by arpit jain
 import re
 regex = '^[a-z0-9]+[\._]?[a-z0-9]+[@]\w+[.]\w{2,3}$'
-def check(email): 
-    if(re.search(regex,email)): 
-        return True  
-    else: 
+def check(email):
+    if(re.search(regex,email)):
+        return True
+    else:
         return False
 # arpit code ended
 client = Blueprint('client', __name__)
@@ -72,7 +73,7 @@ def home():
     cur = conn.execute('SELECT * FROM order_list WHERE user_id=(?)',(current_user.id,))
     for i in cur:
         transactions.append(i)
-    
+
     books = Books.query.limit(18).all()
     #transactions = OrderList.query.filter_by(user_id=current_user.id)
 
@@ -100,19 +101,19 @@ def getDiscount():
 # returns JSON Object as response
 @app.route('/get_data')
 def get_data():
-    
+
     data={}
 
-    #1 earning 
+    #1 earning
     conn = sqlite3.connect(app.config["SQLITE_DB_DIR"])
     cur1 = conn.execute("SELECT SUM(quantity)*110 from order_list")
-    
+
     for x in cur1:
         data["earnings"]= x[0]
 
     #2 Top 5 book revenue
 
-    cur2 = conn.execute('''SELECT book_ISBN,SUM(quantity)*110 as revenue from order_list 
+    cur2 = conn.execute('''SELECT book_ISBN,SUM(quantity)*110 as revenue from order_list
     group by(book_ISBN) ORDER BY revenue DESC LIMIT 5''')
 
     tmp={}
@@ -142,7 +143,7 @@ def get_data():
         data["total_users"]=s[0]
 
 
-    #5 total Books Rated 
+    #5 total Books Rated
 
     curr5=conn.execute("""SELECT DISTINCT COUNT(book_id) FROM ratings""")
 
@@ -158,12 +159,12 @@ def get_data():
 
     #7 Data By Age groups
     age_limit,age_group = {"young_age":[20,30],"middle_age":[40,50],"old_age":[60,70]},{}
-    
+
     for key,value in age_limit.items():
         curr7 = conn.execute(f'''SELECT COUNT(*) FROM USER WHERE AGE BETWEEN {value[0]} AND {value[1]}''')
         for y in curr7:
             age_group[key]=y[0];
-    
+
     data["age_group"]=age_group
 
     #8 User Country
@@ -231,10 +232,13 @@ def register():
         email =request.form['email']
         password = request.form['password']
         age = request.form['age']
-        location = request.form['location']
+        try:
+            location = get_location()
+        except:
+            location = "default location"
 
         ok = User.query.filter_by(email=email).first()
-        
+
         if ok:
             flash('Existing User Login to continue...','error')
             return redirect(url_for('login'))
@@ -311,10 +315,10 @@ def transaction():
         total =request.form["total-price"]
 
         for key,value in data.items():
-            value=ast.literal_eval(value) 
+            value=ast.literal_eval(value)
             frd = OrderList(book_ISBN=key,quantity=value[1],user_id=current_user.id,total_price=total)
-            db.session.add(frd) 
-            db.session.commit() 
+            db.session.add(frd)
+            db.session.commit()
 
     return render_template("client/index.html")
 
@@ -340,7 +344,7 @@ def single_product(bookid):
 
         ok = Ratings.query.filter_by(user_id=user_id).filter_by(book_id=book_id).first();
 
-        if not ok: 
+        if not ok:
             red = Ratings(user_id=user_id,rating=user_rating,book_id=book_id)
             db.session.add(red)
             db.session.commit();
@@ -349,9 +353,9 @@ def single_product(bookid):
             ok.rating=user_rating
 
         print(Ratings.query.all())
-       
 
-    books = Books.query.filter_by(ISBN=bookid).first() 
+
+    books = Books.query.filter_by(ISBN=bookid).first()
     #call to recommendation engine
     print(current_user.id)
 
@@ -368,7 +372,7 @@ def single_product(bookid):
         pickled_data[user_id]=out
     #else:
     #   out=pickled_data[user_id]
-       
+
     filename = "filename.pickle"
     outfile = open(filename,'wb')
     pickle.dump(pickled_data,outfile)
@@ -409,7 +413,7 @@ def personalized_offers():
         print(jsonify(imp_data))
 
         conn = sqlite3.connect(app.config["SQLITE_DB_DIR"])
-        personalized_offers = pd.read_sql_query('SELECT us.id,us.email,us.name,us.location,of.discount,COUNT(*) AS Purchases FROM order_list o ,user us,offer of  WHERE us.id=o.user_id AND o.user_id=of.user_id  GROUP BY(o.user_id) HAVING Purchases>=3', conn) 
+        personalized_offers = pd.read_sql_query('SELECT us.id,us.email,us.name,us.location,of.discount,COUNT(*) AS Purchases FROM order_list o ,user us,offer of  WHERE us.id=o.user_id AND o.user_id=of.user_id  GROUP BY(o.user_id) HAVING Purchases>=3', conn)
         return render_template('offers.html',data=personalized_offers)
 
 
@@ -504,12 +508,12 @@ def contact():
         # mail.send_message('New message from ' + name,
         #                   sender=email,
         #                   recipients = <gmail-user>,
-        #                   body = name + "\n" + email + "\n" + contact + "\n" + message       
+        #                   body = name + "\n" + email + "\n" + contact + "\n" + message
         #                   )
         # mail.send_message('New message from ' + name,
         #                   sender= <gmail-user>,
         #                   recipients = [email],
-        #                   body = "Thankyou for your feedback!"      
+        #                   body = "Thankyou for your feedback!"
         #                   )
-      
+
     return render_template("client/contact.html",profile=helper()[0],transactions=helper()[1])
