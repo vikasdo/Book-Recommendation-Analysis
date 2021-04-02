@@ -495,15 +495,22 @@ def changepwd():
 
 @app.route("/contact", methods = ['GET', 'POST'])
 def contact():
+    flash("Please fill the form correctly to reach us!!","warning")
     if(request.method=='POST'):
         name = request.form.get('name')
         email = request.form.get('email')
         contact = request.form.get('contact')
         message = request.form.get('message')
         #print(name,email,contact,message)
+        if len(name) > 100 or len(email)>100 or len(contact)>20:
+            flash("Invalid details please Try agian!!","error")
+            print("invaid ")
+            return redirect('/contact')
+        print("cool all goog")
         entry = Contact(name=name, contact=contact,email=email, message=message)
         db.session.add(entry)
         db.session.commit()
+        flash("Thank You for Contacting Us We will reach you soon!","success")
         #print(Contact.query.all())
         # mail.send_message('New message from ' + name,
         #                   sender=email,
