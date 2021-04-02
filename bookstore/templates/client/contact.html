@@ -1,10 +1,7 @@
 {% extends 'client/header.html' %}
 {% block head %}
-   
-   <link href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-alpha.2/css/bootstrap.min.css" rel="stylesheet" type="text/css">
+
 <link href="{{ url_for('static', filename='css/contact.css') }}" rel="stylesheet" type="text/css">
- <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>
- 
 
 {% endblock head%}
 {% block content %}
@@ -24,13 +21,13 @@
 					<label>Name</label> 
 				</div>
 			</div>
-			<div class="col-md-6 col-sm-12">
+			<div class="col-md-6 col-sm-12  px-0">
 				<div class="styled-input">
 					<input type="email" name="email" required>
 					<label>Email</label> 
 				</div>
 			</div>
-			<div class="col-md-6 col-sm-12">
+			<div class="col-md-6 col-sm-12 px-0">
 				<div class="styled-input" style="float:right;">
 					<input type="tel" name="contact" required>
 					<label>Phone Number</label> 
