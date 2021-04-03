@@ -14,10 +14,11 @@ https://colab.research.google.com/drive/18xQP5b_7MjMGtxNl-2XgHtH589J69B-K
 # To Setup 
 
  	 1. Actvate virtual environment
-  	git lfs clone url 
+  	
 	python -m venv env
 	env\Scripts\activate
-	
+	2.Install git lfs : 
+	git lfs install
   	pip install -r requirements.txt
 	python main.py
 	
