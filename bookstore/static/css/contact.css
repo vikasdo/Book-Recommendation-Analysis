@@ -60,7 +60,7 @@ input:focus ~ label, textarea:focus ~ label, input:valid ~ label, textarea:valid
 
 input,
 textarea {
-    padding: 25px;
+    padding: 26px;
     border: 0;
     width: 100%;
     font-size: 1.5rem;
