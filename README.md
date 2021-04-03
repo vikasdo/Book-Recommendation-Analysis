@@ -17,7 +17,7 @@ https://colab.research.google.com/drive/18xQP5b_7MjMGtxNl-2XgHtH589J69B-K
   	
 	python -m venv env
 	env\Scripts\activate
-	2.Install git lfs : ![referrences](https://docs.github.com/en/github/managing-large-files/installing-git-large-file-storage#:~:text=Installing%20Git%20Large%20File%20Storage.%201%20Navigate%20to,Premium%20Support.%20Be%20sure%20to%20include%20...%20)
+	2.Install git lfs : [referrences](https://docs.github.com/en/github/managing-large-files/installing-git-large-file-storage#:~:text=Installing%20Git%20Large%20File%20Storage.%201%20Navigate%20to,Premium%20Support.%20Be%20sure%20to%20include%20...%20)
 	git lfs install 
 	git lfs pull
 	
