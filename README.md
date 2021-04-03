@@ -12,15 +12,22 @@ https://colab.research.google.com/drive/1W3bnFPMFdxa1ExdYQxuYv43k5QzFrG10
 https://colab.research.google.com/drive/18xQP5b_7MjMGtxNl-2XgHtH589J69B-K
 
 # To Setup 
+```
+1. Actvate virtual environment
+  	
+python -m venv env
+env\Scripts\activate
+```
 
- 	 1. Actvate virtual environment
-  	git lfs clone url 
-	python -m venv env
-	env\Scripts\activate
-	
-  	pip install -r requirements.txt
+# Install git lfs : [referrences](https://docs.github.com/en/github/managing-large-files/installing-git-large-file-storage#:~:text=Installing%20Git%20Large%20File%20Storage.%201%20Navigate%20to,Premium%20Support.%20Be%20sure%20to%20include%20...%20)
+to know more :https://youtu.be/9gaTargV5BY
+
+	git lfs install 
+	git lfs pull
+
+	pip install -r requirements.txt
 	python main.py
-	
+
 # To run 
 	Activate 
 	source env/bin/activate
