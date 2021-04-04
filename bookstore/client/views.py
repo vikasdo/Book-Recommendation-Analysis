@@ -495,7 +495,6 @@ def changepwd():
 
 @app.route("/contact", methods = ['GET', 'POST'])
 def contact():
-    # flash("Please fill the form correctly to reach us!!","warning")
     if(request.method=='POST'):
         name = request.form.get('name')
         email = request.form.get('email')
@@ -520,5 +519,5 @@ def contact():
         #                   recipients = [email],
         #                   body = "Thankyou for your feedback!"
         #                   )
-
-    return render_template("client/contact.html",profile=helper()[0],transactions=helper()[1])
+        return redirect('/contact')
+    return render_template("client/contact2.html")
