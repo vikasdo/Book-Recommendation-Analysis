@@ -64,7 +64,7 @@ $(document).ready(function(){
         let price = $('#item-price').text()
         let item_count = $('#item-value').val()
 
-        console.log(product_id,price,item_count)
+        /*console.log(product_id,price,item_count)*/
 
         let fe = localStorage.getItem(product_id)
 
