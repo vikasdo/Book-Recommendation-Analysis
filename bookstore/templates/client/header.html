@@ -53,6 +53,10 @@ p=e.getElementsByTagName(a)[0];p.parentNode.insertBefore(m,p);
         <a href=" {{url_for('register')}} " type="button"
           class="btn btn-md" style="background-color: #8a2be2; color:#fff">Sign up</a>
       </li>
+      <li class="nav-item mx-3 my-1">
+        <a href=" {{url_for('contact')}} " type="button"
+          class="btn btn-md" style="background-color: #8a2be2; color:#fff">contact</a>
+      </li>
       {% else %}
       <li class="nav-item">
         <a href="#!" data-toggle="modal" id="basket" data-target="#cartModalCenter" class="nav-link navbar-link ">
@@ -65,12 +69,6 @@ p=e.getElementsByTagName(a)[0];p.parentNode.insertBefore(m,p);
           Shop
         </a>
       </li>
-      <li class="nav-item">
-        <a href=" {{url_for('contact')}} " class="nav-link waves-effect">
-          Contact
-        </a>
-      </li>
-      
           <li class="nav-item">
             <a href="{{url_for('myprofile')}}" type="button"
             class="btn btn-outline-primary btn-sm" data-toggle="modal" data-target="#abc">My Profile </a>
@@ -79,8 +77,12 @@ p=e.getElementsByTagName(a)[0];p.parentNode.insertBefore(m,p);
         <a href=" {{url_for('logout')}} " type="button"
           class="btn btn-outline-primary btn-sm" id="logout-user">Logout</a>
       </li>
-      
+      <li class="nav-item">
+                    <a href=" {{url_for('contact')}} " type="button" class="btn btn-outline-primary btn-sm">Contact</a>
+                </li>
+
       {% endif %}
+      
     </ul>
 
   </div>
