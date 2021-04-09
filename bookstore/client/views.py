@@ -521,3 +521,9 @@ def contact():
         #                   )
         return redirect('/contact')
     return render_template("client/contact2.html")
+
+@app.errorhandler(404)
+# inbuilt function which takes error as parameter
+def not_found(e):  
+# defining function
+  return render_template("client/404.html")
