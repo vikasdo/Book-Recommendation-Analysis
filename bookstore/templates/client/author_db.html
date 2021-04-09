@@ -1,0 +1,208 @@
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="{{ url_for('static',filename='styles.css') }}">
+    <title>author_db</title>
+</head>
+<style>
+    table {
+        font-family: arial, sans-serif;
+        border-collapse: collapse;
+        width: 100%;
+    }
+
+    td,
+    th {
+        text-align: left;
+        padding: 8px;
+    }
+
+    tr:nth-child(even) {
+        background-color: #dddddd;
+    }
+
+</style>
+    <script>
+
+       
+
+        window.onload = function () {
+
+             
+
+            var chart1 = new CanvasJS.Chart("chartContainer1", {
+                exportEnabled: true,
+                animationEnabled: true,
+                title: {
+                    text: "Age wise analysis of Readers"
+                },
+                legend: {
+                    cursor: "pointer",
+                    itemclick: explodePie
+                },
+                data: [{
+                    type: "pie",
+                    showInLegend: true,
+                    toolTipContent: "{name}: <strong>{y}%</strong>",
+                    indexLabel: "{name} - {y}%",
+                    dataPoints: [
+                        { y: {{age_group[20]}} , name: "Age Between 1 to 20" },
+                        { y: {{age_group[40]}} , name: "Age Between 21 to 40" },
+                        { y: {{age_group[60]}} , name: "Age Between 41 to 60" },
+                        { y: {{age_group[80]}} , name: "Age Between 61 to 80" },
+                        { y: {{age_group[100]}} , name: "Age Between 81 and above" },
+                    ]
+                }]
+            });
+            chart1.render();
+
+            var countries_readers = [
+                    {% for key, value in countries.items() %}
+                        { label: "{{ key }}", y: {{ value }} },
+                    {% endfor %}
+            ];
+
+            var chart2 = new CanvasJS.Chart("chartContainer2", {
+                    animationEnabled: true,
+                    theme: "light2", // "light1", "light2", "dark1", "dark2"
+                    title: {
+                        text: "Countries of Readers"
+                    },
+                    axisY: {
+                        title: "Number of Readers",
+                        suffix: ""
+                    },
+                    axisX: {
+                        title: "Countries"
+                    },
+                    data: [{
+                        type: "column",
+                        yValueFormatString: "#,#0#\"\"",
+                        dataPoints: countries_readers
+                    }]
+                });
+                chart2.render();
+
+                var top_rated_books = [
+                {% for book, rating in top_ratings.items() %}
+                    { label: "{{book}}", y: {{rating}} },
+                    {% endfor %}
+                ];
+
+                var chart3 = new CanvasJS.Chart("chartContainer3", {
+                        theme: "light1", // "light1", "light2", "dark1"
+                        animationEnabled: true,
+                        exportEnabled: true,
+                        title: {
+                            text: "Top Rated Books"
+                        },
+                        axisX: {
+                            margin: 10,
+                            labelPlacement: "inside",
+                            tickPlacement: "inside"
+                        },
+                        axisY2: {
+                            title: "Rating",
+                            titleFontSize: 14,
+                            includeZero: true,
+                            suffix: ""
+                        },
+                        data: [{
+                            type: "bar",
+                            axisYType: "secondary",
+                            yValueFormatString: "#,##.###",
+                            indexLabel: "{y}",
+                            dataPoints: top_rated_books
+                        }]
+                    });
+                    chart3.render();
+        }
+
+        function explodePie(e) {
+            if (typeof (e.dataSeries.dataPoints[e.dataPointIndex].exploded) === "undefined" || !e.dataSeries.dataPoints[e.dataPointIndex].exploded) {
+                e.dataSeries.dataPoints[e.dataPointIndex].exploded = true;
+            } else {
+                e.dataSeries.dataPoints[e.dataPointIndex].exploded = false;
+            }
+            e.chart1.render();
+
+        }
+
+    </script>
+<center>
+<body>
+    {% if not is_named_in %}
+    <form action="/authordb" method="POST">
+        <input type="text" name="author_name" autofocus placeholder="Author Name" required>
+        <input type="submit" value="Submit">
+    </form>
+    {% endif %}
+    {% if is_named_in %}
+        <img src="https://lh3.googleusercontent.com/proxy/kbDZAGHdfaOGJ4K_QPKRnaGLIfeZY4WTSDFhK7sHgKWYKv5DxocGIGc-nLGRbSSUniiIsV_tRoUP99gLFwyhR2tFG8DiwiL_TQI9" width="12%"
+            height="20%" alt="author profile">
+        <h1>{{author_name}}</h1>
+        <br>
+    <hr style="border-top: 1px dashed black;">
+
+    <div id="chartContainer1" style="height: 300px; width: 100%;"></div>
+    <script src="https://canvasjs.com/assets/script/canvasjs.min.js"></script>
+    <hr style="border-top: 1px dashed black;">
+    <br>
+    <div id="chartContainer2" style="height: 300px; width: 100%;"></div>
+    <script src="https://canvasjs.com/assets/script/canvasjs.min.js"></script>
+    <hr style="border-top: 1px dashed black;">
+    <br>
+    <div id="chartContainer3" style="height: 300px; width: 100%;"></div>
+    <script src="https://canvasjs.com/assets/script/canvasjs.min.js"></script>
+    <br>
+    <hr style="border-top: 1px dashed black;">
+    <table>
+        <tr>
+            <th>Book Preview</th>
+            <th>Book Title</th>
+            <th>Publisher</th>
+            <th>Publishing date</th>
+            <th>Average rating</th>
+            <th>Max Rating</th>
+            <th>Min Rating</th>
+            <th>Location Of Readers</th>
+        </tr>
+        {% for book_detail in books_details %}
+        <tr>
+            <td><img src="{{book_detail['book_image']}}" alt="Preview Unavailable"></td>
+            <td>{{book_detail['title']}}</td>
+            <td>{{book_detail['publisher']}}</td>
+            <td>{{book_detail['pub_date']}}</td>
+            {% if book_detail['avg_rating'] != -1 %}
+            <td>{{book_detail['avg_rating']}}</td>
+            <td>{{book_detail['max_rating']}}</td>
+            <td>{{book_detail['min_rating']}}</td>
+            {% else %}
+            <td>Not Rated Yet</td>
+            <td>Not Rated Yet</td>
+            <td>Not Rated Yet</td>
+            {% endif %}
+            <td>
+            
+                <ul>
+                    <li>
+                        {% for location in book_detail['locations'] %}
+                                {{location}}
+                        {% endfor %}
+                    </li>
+                </ul>
+            </td>
+            
+
+        </tr>
+        {% endfor %}
+    </table>
+    {% endif %}
+
+
+</body>
+</center>
+
+</html>
