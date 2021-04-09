@@ -577,7 +577,7 @@ def authordb():
                     book_detail['avg_rating'] = -1
                 books_details.append(book_detail)
             # print(age_group)
-            # top_ratings = dict(sorted(top_ratings.items(), key=lambda item: item[1]))
+            top_ratings = dict(sorted(top_ratings.items(), key=lambda item: item[1]))
             return render_template("client/author_db.html", books_details=books_details, is_named_in=True, author_name=author_name, age_group=age_group, countries=countries, top_ratings = top_ratings)
     else:
         return render_template("client/author_db.html", is_named_in=False, age_group=age_group, countries=countries, top_ratings=top_ratings)
