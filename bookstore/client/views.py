@@ -527,3 +527,65 @@ def contact():
 def not_found(e):  
 # defining function
   return render_template("client/404.html")
+
+
+
+
+@app.route("/authordb", methods=['GET', 'POST'])
+def authordb():
+    age_group = {20: 0, 40: 0, 60: 0, 80: 0, 100: 0}
+    countries = {}
+    top_ratings = {}
+    if request.method == 'POST':
+        author_name = request.form.get("author_name")
+        author_books = Books.query.filter_by(author=author_name).all()
+        if author_books is not None:  # if there is no author by that name in database
+            books_details = []
+            for author_book in author_books:
+                book_detail = {}
+                book_detail['title'] = author_book.title
+                book_detail['book_image'] = author_book.bookImage
+                book_detail['pub_date'] = author_book.pubDate
+                book_detail['publisher'] = author_book.publisher
+                book_detail['locations'] = []
+                try:  # if there are no ratings of that book it will return none
+                    ratings = Ratings.query.filter_by(
+                        book_id=author_book.bid).all()
+                    book_detail['max_rating'] = -1
+                    book_detail['min_rating'] = 10000
+                    book_detail['avg_rating'] = 0
+                    for rating in ratings:
+                        book_detail['avg_rating'] += rating.rating
+                        if book_detail['max_rating'] < rating.rating:
+                            book_detail['max_rating'] = rating.rating
+                        if book_detail['min_rating'] > rating.rating:
+                            book_detail['min_rating'] = rating.rating
+                        user = User.query.filter_by(id=rating.user_id).first()
+                        location_split = user.location.split(',')
+                        if location_split[1] not in countries.keys():
+                            countries[location_split[1]] = 1
+                        else:
+                            countries[location_split[1]] += 1
+                        book_detail['locations'].append(user.location)
+                        if int(user.age) <= 20:
+                            age_group[20] += 1
+                        elif int(user.age) <= 40:
+                            age_group[40] += 1
+                        elif int(user.age) <= 60:
+                            age_group[60] += 1
+                        elif int(user.age) <= 80:
+                            age_group[80] += 1
+                        else:
+                            age_group[100] += 1
+                    book_detail['avg_rating'] /= len(ratings)
+                    top_ratings[author_book.title] = book_detail['avg_rating']
+                except:
+                    book_detail['max_rating'] = -1
+                    book_detail['min_rating'] = -1
+                    book_detail['avg_rating'] = -1
+                books_details.append(book_detail)
+            # print(age_group)
+            top_ratings = dict(sorted(top_ratings.items(), key=lambda item: item[1]))
+            return render_template("client/author_db.html", books_details=books_details, is_named_in=True, author_name=author_name, age_group=age_group, countries=countries, top_ratings=top_ratings)
+    else:
+        return render_template("client/author_db.html", is_named_in=False, age_group=age_group, countries=countries, top_ratings=top_ratings)
