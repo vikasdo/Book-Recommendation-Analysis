@@ -2,8 +2,7 @@
 
 # Theme approach ![](https://warehouse-camo.ingress.cmh1.psfhosted.org/582ab2eba9d0e0f4acbea2fd883f604349908147/68747470733a2f2f696d672e736869656c64732e696f2f707970692f707976657273696f6e732f74656e736f72666c6f772e7376673f7374796c653d706c6173746963)
 <img align="right" src="https://media.giphy.com/media/l0HlESqXkgB97Xs7C/giphy.gif" width = "200" height = "250">
-Now a days due to the Growth of Technology Everyone is able to make Buy items online and The Ecommerce Industry is expected to rise in Coming Years .So for this we need a Efficient Ecommerce Recommendation system Where it Suggests Recommendation to users . But In Our Project We Try To recommend the Items to Authors,Publishers and Retailers in such a way so that They will get a personalized Feed back from user reviews. Retailers Can also analyze the Top Trending Books and Focus on them in Personalization for users and send them Exciting Offers which can convert or make user to purchase and We show the Heat map Of users And Give Recommendation based On Demographic Features Also. So In this Way the Retailer gets more profit By Understanding the customer and focusing on their purchase pattern
-
+Today, the growth of technology has enabled everyone to make and buy items online. The E-commerce industry is expected to rise in the coming years and so there is a need for an efficient E-commerce recommendation system which suggests products to users .In our project, we try to recommend products to authors, publishers and retailers by providing them with personalized feedback from user reviews. The retailers can also analyze the top trending books and focus on personalization for users or provide them with exciting offers which can motivate the user to make more purchases. We also provide a Heat map of users and give recommendations based on the demographic features also. So, in this Way the retailer gets more profits by understanding the customer and focusing on their purchase pattern.
 # Document
 
 [Link to docs](https://drive.google.com/file/d/1f7TCuBrfeaU62j1wUKqRqG286XLAtAC8/view?usp=sharing)
@@ -13,15 +12,22 @@ https://colab.research.google.com/drive/1W3bnFPMFdxa1ExdYQxuYv43k5QzFrG10
 https://colab.research.google.com/drive/18xQP5b_7MjMGtxNl-2XgHtH589J69B-K
 
 # To Setup 
+```
+1. Actvate virtual environment
+  	
+python -m venv env
+env\Scripts\activate
+```
 
- 	 1. Actvate virtual environment
-  	git lfs clone url 
-	python -m venv env
-	env\Scripts\activate
-	
-  	pip install -r requirements.txt
+# Install git lfs : [referrences](https://docs.github.com/en/github/managing-large-files/installing-git-large-file-storage#:~:text=Installing%20Git%20Large%20File%20Storage.%201%20Navigate%20to,Premium%20Support.%20Be%20sure%20to%20include%20...%20)
+to know more :https://youtu.be/9gaTargV5BY
+
+	git lfs install 
+	git lfs pull
+
+	pip install -r requirements.txt
 	python main.py
-	
+
 # To run 
 	Activate 
 	source env/bin/activate
@@ -127,6 +133,17 @@ git push -u origin <your_branch_name>
     <td align="center"><a href="https://github.com/vikasdo"><img src="https://avatars.githubusercontent.com/u/44545660?s=400&u=eeb8f17ce2c96e0e37b075b56218284a47589c40&v=4" width="100px;" alt=""/><br /><sub><b>Vikas</b></sub></a><br /></td>
   </tr>
 </table>
+
+## Book Recommendation System is a part of these open source programs:
+
+<p align="center">
+ <a>
+ <img  width="70%" height="30%" src="https://raw.githubusercontent.com/GirlScriptSummerOfCode/MentorshipProgram/master/GSsoc%20Type%20Logo%20Black.png">
+
+ 
+</p>
+
+</br>
 
 # Contributors👨‍💻👩🏽‍💻
 

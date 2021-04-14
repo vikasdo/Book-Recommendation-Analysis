@@ -7,7 +7,8 @@ from datetime import datetime
 import pandas as pd
 import glob,json,re
 import os,pickle,collections
-from bookstore.models import User,Books,Ratings,OrderList,offer
+from bookstore.models import User,Books,Ratings,OrderList,offer,Contact
+from bookstore.location import get_location
 from bookstore import db, serializer, app
 from werkzeug.security import generate_password_hash
 from bookstore.client.recommendation_engine import Recommendation_engine
@@ -17,7 +18,15 @@ import sqlite3
 import random
 #connection obj
 
-
+# for email validations added by arpit jain
+import re
+regex = '^[a-z0-9]+[\._]?[a-z0-9]+[@]\w+[.]\w{2,3}$'
+def check(email):
+    if(re.search(regex,email)):
+        return True
+    else:
+        return False
+# arpit code ended
 client = Blueprint('client', __name__)
 
 
@@ -49,14 +58,22 @@ def helper():
     return User.query.filter_by(id=current_user.id).first(),transactions
 
 @app.route('/')
-@login_required
+# @login_required  becuase of this the message is not in red color i had done this manually by is_authenticated
+
 def home():
+    #code added by arpit
+    if current_user.is_authenticated:
+        # it means user is logged in
+        pass
+    else:
+        flash("Please Login to access this page!!","error")
+        return redirect(url_for("login"))
     transactions=[]
     conn = sqlite3.connect(app.config["SQLITE_DB_DIR"])
     cur = conn.execute('SELECT * FROM order_list WHERE user_id=(?)',(current_user.id,))
     for i in cur:
         transactions.append(i)
-    
+
     books = Books.query.limit(18).all()
     #transactions = OrderList.query.filter_by(user_id=current_user.id)
 
@@ -84,19 +101,19 @@ def getDiscount():
 # returns JSON Object as response
 @app.route('/get_data')
 def get_data():
-    
+
     data={}
 
-    #1 earning 
+    #1 earning
     conn = sqlite3.connect(app.config["SQLITE_DB_DIR"])
     cur1 = conn.execute("SELECT SUM(quantity)*110 from order_list")
-    
+
     for x in cur1:
         data["earnings"]= x[0]
 
     #2 Top 5 book revenue
 
-    cur2 = conn.execute('''SELECT book_ISBN,SUM(quantity)*110 as revenue from order_list 
+    cur2 = conn.execute('''SELECT book_ISBN,SUM(quantity)*110 as revenue from order_list
     group by(book_ISBN) ORDER BY revenue DESC LIMIT 5''')
 
     tmp={}
@@ -126,7 +143,7 @@ def get_data():
         data["total_users"]=s[0]
 
 
-    #5 total Books Rated 
+    #5 total Books Rated
 
     curr5=conn.execute("""SELECT DISTINCT COUNT(book_id) FROM ratings""")
 
@@ -142,12 +159,12 @@ def get_data():
 
     #7 Data By Age groups
     age_limit,age_group = {"young_age":[20,30],"middle_age":[40,50],"old_age":[60,70]},{}
-    
+
     for key,value in age_limit.items():
         curr7 = conn.execute(f'''SELECT COUNT(*) FROM USER WHERE AGE BETWEEN {value[0]} AND {value[1]}''')
         for y in curr7:
             age_group[key]=y[0];
-    
+
     data["age_group"]=age_group
 
     #8 User Country
@@ -183,7 +200,7 @@ def dashboard():
 
 @app.route('/login' , methods=['GET' , 'POST'])
 def login():
-
+    #added by arpit
     if current_user.is_authenticated:
         flash('Already Logged in...','info')
         return redirect(url_for('home'))
@@ -195,14 +212,17 @@ def login():
         password = request.form['password']
 
         ok = User.query.filter_by(email=email).first()
-        if ok is not None:
+        if ok == None:
+            flash("Email doesn't exit, Signup First...",'error')
+            return redirect(url_for('register'))
+        # form validations for login added by arpit
+        elif str(ok.password) == (str(password)):
             login_user(ok)
             flash("Login Success :)",'success')
             return redirect(url_for('home'))
         else:
-            flash("Email doesn't exit, Signup First...",'error')
-            return redirect(url_for('register'))
-
+            flash("Wrong password :(","error")
+            return redirect(url_for("login"))
     return render_template('client/login.html')
 
 @app.route('/register' , methods = ['GET' , 'POST'])
@@ -212,16 +232,41 @@ def register():
         email =request.form['email']
         password = request.form['password']
         age = request.form['age']
-        location = request.form['location']
+        try:
+            location = get_location()
+        except:
+            location = "default location"
 
         ok = User.query.filter_by(email=email).first()
 
         if ok:
             flash('Existing User Login to continue...','error')
             return redirect(url_for('login'))
-
+        # form validations for signup added by arpit jain
+        if(check(email) == True):
+            pass
+        else:
+            flash('Email is not valid :( Please Try Again','error')
+            return redirect(url_for('register'))
+        if len(username) <=3 :
+            flash('Username length must be Greater than 3 ','error')
+            return redirect(url_for('register'))
+        else:
+            pass
+        if len(password) <=5 :
+            flash('Password length should be Greater than 5 ','error')
+            return redirect(url_for('register'))
+        else:
+            pass
+        if int(age) <=0:
+            flash("Age is not Valid!! Please Try agin..",'error')
+            return redirect(url_for('register'))
+        else:
+            pass
+        #generate_password_hash  is not working properly
+        # password=generate_password_hash(password, method='sha256')
         new_user =  User(name=username,email=email,
-                        password=generate_password_hash(password, method='sha256'),location=location,age=age)
+                        password=password,location=location,age=age)
         db.session.add(new_user)
         db.session.commit()
         try:
@@ -270,10 +315,10 @@ def transaction():
         total =request.form["total-price"]
 
         for key,value in data.items():
-            value=ast.literal_eval(value) 
+            value=ast.literal_eval(value)
             frd = OrderList(book_ISBN=key,quantity=value[1],user_id=current_user.id,total_price=total)
-            db.session.add(frd) 
-            db.session.commit() 
+            db.session.add(frd)
+            db.session.commit()
 
     return render_template("client/index.html")
 
@@ -299,7 +344,7 @@ def single_product(bookid):
 
         ok = Ratings.query.filter_by(user_id=user_id).filter_by(book_id=book_id).first();
 
-        if not ok: 
+        if not ok:
             red = Ratings(user_id=user_id,rating=user_rating,book_id=book_id)
             db.session.add(red)
             db.session.commit();
@@ -308,9 +353,9 @@ def single_product(bookid):
             ok.rating=user_rating
 
         print(Ratings.query.all())
-       
 
-    books = Books.query.filter_by(ISBN=bookid).first() 
+
+    books = Books.query.filter_by(ISBN=bookid).first()
     #call to recommendation engine
     print(current_user.id)
 
@@ -327,7 +372,7 @@ def single_product(bookid):
         pickled_data[user_id]=out
     #else:
     #   out=pickled_data[user_id]
-       
+
     filename = "filename.pickle"
     outfile = open(filename,'wb')
     pickle.dump(pickled_data,outfile)
@@ -368,7 +413,7 @@ def personalized_offers():
         print(jsonify(imp_data))
 
         conn = sqlite3.connect(app.config["SQLITE_DB_DIR"])
-        personalized_offers = pd.read_sql_query('SELECT us.id,us.email,us.name,us.location,of.discount,COUNT(*) AS Purchases FROM order_list o ,user us,offer of  WHERE us.id=o.user_id AND o.user_id=of.user_id  GROUP BY(o.user_id) HAVING Purchases>=3', conn) 
+        personalized_offers = pd.read_sql_query('SELECT us.id,us.email,us.name,us.location,of.discount,COUNT(*) AS Purchases FROM order_list o ,user us,offer of  WHERE us.id=o.user_id AND o.user_id=of.user_id  GROUP BY(o.user_id) HAVING Purchases>=3', conn)
         return render_template('offers.html',data=personalized_offers)
 
 
@@ -447,3 +492,100 @@ def changepwd():
         if 'cli_email' not in session:
             return redirect(url_for("forgotpwd"))
         return render_template("client/changepwd.html")
+
+@app.route("/contact", methods = ['GET', 'POST'])
+def contact():
+    if(request.method=='POST'):
+        name = request.form.get('name')
+        email = request.form.get('email')
+        contact = request.form.get('contact')
+        message = request.form.get('message')
+        #print(name,email,contact,message)
+        if len(name) > 100 or len(email)>100 or len(contact)>20:
+            flash("Invalid details please Try agian!!","error")
+            return redirect('/contact')
+        entry = Contact(name=name, contact=contact,email=email, message=message)
+        db.session.add(entry)
+        db.session.commit()
+        flash("Thank You for Contacting Us We will reach you soon!","success")
+        #print(Contact.query.all())
+        # mail.send_message('New message from ' + name,
+        #                   sender=email,
+        #                   recipients = <gmail-user>,
+        #                   body = name + "\n" + email + "\n" + contact + "\n" + message
+        #                   )
+        # mail.send_message('New message from ' + name,
+        #                   sender= <gmail-user>,
+        #                   recipients = [email],
+        #                   body = "Thankyou for your feedback!"
+        #                   )
+        return redirect('/contact')
+    return render_template("client/contact2.html")
+
+@app.errorhandler(404)
+# inbuilt function which takes error as parameter
+def not_found(e):  
+# defining function
+  return render_template("client/404.html")
+
+
+
+
+@app.route("/authordb", methods=['GET', 'POST'])
+def authordb():
+    age_group = {20: 0, 40: 0, 60: 0, 80: 0, 100: 0}
+    countries = {}
+    top_ratings = {}
+    if request.method == 'POST':
+        author_name = request.form.get("author_name")
+        author_books = Books.query.filter_by(author=author_name).all()
+        if author_books is not None:  # if there is no author by that name in database
+            books_details = []
+            for author_book in author_books:
+                book_detail = {}
+                book_detail['title'] = author_book.title
+                book_detail['book_image'] = author_book.bookImage
+                book_detail['pub_date'] = author_book.pubDate
+                book_detail['publisher'] = author_book.publisher
+                book_detail['locations'] = []
+                try:  # if there are no ratings of that book it will return none
+                    ratings = Ratings.query.filter_by(
+                        book_id=author_book.bid).all()
+                    book_detail['max_rating'] = -1
+                    book_detail['min_rating'] = 10000
+                    book_detail['avg_rating'] = 0
+                    for rating in ratings:
+                        book_detail['avg_rating'] += rating.rating
+                        if book_detail['max_rating'] < rating.rating:
+                            book_detail['max_rating'] = rating.rating
+                        if book_detail['min_rating'] > rating.rating:
+                            book_detail['min_rating'] = rating.rating
+                        user = User.query.filter_by(id=rating.user_id).first()
+                        location_split = user.location.split(',')
+                        if location_split[1] not in countries.keys():
+                            countries[location_split[1]] = 1
+                        else:
+                            countries[location_split[1]] += 1
+                        book_detail['locations'].append(user.location)
+                        if int(user.age) <= 20:
+                            age_group[20] += 1
+                        elif int(user.age) <= 40:
+                            age_group[40] += 1
+                        elif int(user.age) <= 60:
+                            age_group[60] += 1
+                        elif int(user.age) <= 80:
+                            age_group[80] += 1
+                        else:
+                            age_group[100] += 1
+                    book_detail['avg_rating'] /= len(ratings)
+                    top_ratings[author_book.title] = book_detail['avg_rating']
+                except:
+                    book_detail['max_rating'] = -1
+                    book_detail['min_rating'] = -1
+                    book_detail['avg_rating'] = -1
+                books_details.append(book_detail)
+            # print(age_group)
+            top_ratings = dict(sorted(top_ratings.items(), key=lambda item: item[1]))
+            return render_template("client/author_db.html", books_details=books_details, is_named_in=True, author_name=author_name, age_group=age_group, countries=countries, top_ratings=top_ratings)
+    else:
+        return render_template("client/author_db.html", is_named_in=False, age_group=age_group, countries=countries, top_ratings=top_ratings)
