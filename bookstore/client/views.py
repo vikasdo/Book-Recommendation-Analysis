@@ -12,6 +12,7 @@ from bookstore.location import get_location
 from bookstore import db, serializer, app
 from werkzeug.security import generate_password_hash
 from bookstore.client.recommendation_engine import Recommendation_engine
+from bookstore.client.automate_sqlite_to_pkl import update_rating_matrix
 # create A Blueprint
 import json
 import sqlite3
@@ -269,6 +270,7 @@ def register():
                         password=password,location=location,age=age)
         db.session.add(new_user)
         db.session.commit()
+        update_rating_matrix()
         try:
             message = Message("You are registered in Book.ly!!",
                             sender='bookly1120@gmail.com', recipients=[email])
