@@ -17,8 +17,71 @@ p=e.getElementsByTagName(a)[0];p.parentNode.insertBefore(m,p);
 })(window,document,'script','https://u.heatmap.it/log.js');
 </script>
     <title>Book.ly</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+
+    <style>
+    html {
+  scroll-behavior: smooth;
+}
+a
+{
+  text-decoration: none;
+}
+#button {
+  display: inline-block;
+  background-color: #FF9800;
+  width: 52px;
+  height: 52px;
+  text-align: center;
+  border-radius: 25px;
+  position: fixed;
+  bottom: 10px;
+  right: -10px;
+  transition: background-color .3s, 
+    opacity .5s, visibility .5s;
+  opacity: 0;
+  visibility: hidden;
+  z-index: 1000;
+}
+#button::after {
+  content: "\f077";
+  font-family: FontAwesome;
+  font-weight: normal;
+  font-style: normal;
+  font-size: 2em;
+  line-height: 50px;
+  color: #fff;
+}
+#button:hover {
+  cursor: pointer;
+  background-color: #333;
+}
+#button:active {
+  background-color: #555;
+}
+#button.show {
+  opacity: 1;
+  visibility: visible;
+}
+
+/* Styles for the content section */
+
+
+@media (min-width: 500px) {
+  
+  #button {
+    margin: 30px;
+  }
+}
+
+
+
+
+    </style>
   </head>
   <body>
+    <!-- Back to top button -->
+<a id="button" style="text-decoration:none"></a>
     <!-- Navbar -->
     <nav class="navbar navbar-expand-md navbar-light">
 
@@ -249,6 +312,21 @@ p=e.getElementsByTagName(a)[0];p.parentNode.insertBefore(m,p);
       }
     });
     }
+  </script>
+  <script>
+    var btn = $('#button');
+$(window).scroll(function() {
+if ($(window).scrollTop() > 300) {
+  btn.addClass('show');
+} else {
+  btn.removeClass('show');
+}
+});
+
+btn.on('click', function(e) {
+e.preventDefault();
+$('html, body').animate({scrollTop:0}, '300');
+});
   </script>
 </body>
 </html>
