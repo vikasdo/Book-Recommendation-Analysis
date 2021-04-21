@@ -589,3 +589,37 @@ def authordb():
             return render_template("client/author_db.html", books_details=books_details, is_named_in=True, author_name=author_name, age_group=age_group, countries=countries, top_ratings=top_ratings)
     else:
         return render_template("client/author_db.html", is_named_in=False, age_group=age_group, countries=countries, top_ratings=top_ratings)
+
+#for contact
+import csv
+import io 
+from flask import make_response
+def rowToListContact(obj):
+    lst = []
+    name = obj.name
+    email = obj.email
+    number = obj.contact
+    msg = obj.message
+    lst.append(name)
+    lst.append(email)
+    lst.append(number)
+    lst.append(msg)
+    return lst
+
+@app.route('/downloadcontact')
+# @login_required
+def ContactToCsv():
+    allContacts = Contact.query.all()
+    if len(allContacts) == 0:
+        flash("No Contacts available","danger")
+        return redirect("/")
+    si = io.StringIO()
+    cw = csv.writer(si, delimiter=",")
+    cw.writerow(["Name", "Email" , "Number", "Message"])
+    for row in allContacts:
+        row = rowToListContact(row)
+        cw.writerow(row)
+    output = make_response(si.getvalue())
+    output.headers["Content-Disposition"] = f"attachment; filename=contact_response.csv"
+    output.headers["Content-type"] = "text/csv"
+    return output
