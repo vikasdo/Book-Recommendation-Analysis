@@ -49,7 +49,7 @@ python manager.py db upgrade
 
 <h3>Scan the below QR to visit the Website</h3>
 <img src="https://github.com/vikasdo/Book-Recommendation-Analysis/blob/main/bookstore/static/img/qrcode_booklystore.herokuapp.com.png" width="200px" height="200px"/>
-<a href="https://booklystore.herokuapp.com/login" style="text-decoration:none; color:white;">Bookly Store</a>
+<a href="https://bookly-bookstore.herokuapp.com/login" style="text-decoration:none; color:white;">Bookly Store</a>
 
 # Contribution Guidelines🏗
 
