@@ -1,5 +1,14 @@
 ![logo](https://github.com/vikasdo/Book-Recommendation-Analysis/blob/main/bookstore/static/img/logo.PNG)
 
+
+![Issues](https://img.shields.io/github/issues/vikasdo/Book-Recommendation-Analysis)
+![Pull Requests](https://img.shields.io/github/issues-pr/vikasdo/Book-Recommendation-Analysis)
+![Forks](https://img.shields.io/github/forks/vikasdo/Book-Recommendation-Analysis)
+![Stars](https://img.shields.io/github/stars/vikasdo/Book-Recommendation-Analysis)
+[![License](https://img.shields.io/github/license/vikasdo/Book-Recommendation-Analysis)](https://github.com/vikasdo/Book-Recommendation-Analysis)
+![](https://img.shields.io/github/repo-size/vikasdo/Book-Recommendation-Analysis.svg?label=Repo%20size&style=flat-square)&nbsp;
+
+
 # Theme approach ![](https://warehouse-camo.ingress.cmh1.psfhosted.org/582ab2eba9d0e0f4acbea2fd883f604349908147/68747470733a2f2f696d672e736869656c64732e696f2f707970692f707976657273696f6e732f74656e736f72666c6f772e7376673f7374796c653d706c6173746963)
 <img align="right" src="https://media.giphy.com/media/l0HlESqXkgB97Xs7C/giphy.gif" width = "200" height = "250">
 Today, the growth of technology has enabled everyone to make and buy items online. The E-commerce industry is expected to rise in the coming years and so there is a need for an efficient E-commerce recommendation system which suggests products to users .In our project, we try to recommend products to authors, publishers and retailers by providing them with personalized feedback from user reviews. The retailers can also analyze the top trending books and focus on personalization for users or provide them with exciting offers which can motivate the user to make more purchases. We also provide a Heat map of users and give recommendations based on the demographic features also. So, in this Way the retailer gets more profits by understanding the customer and focusing on their purchase pattern.
