@@ -625,3 +625,39 @@ def ContactToCsv():
     output.headers["Content-Disposition"] = f"attachment; filename=contact_response.csv"
     output.headers["Content-type"] = "text/csv"
     return output
+
+
+def rowToListbooks(obj):
+    lst = []
+    ISBN = obj.ISBN
+    title = obj.title
+    author = obj.author
+    publisher = obj.publisher
+    book_cost = obj.book_cost
+    pubDate = obj.pubDate
+    lst.append(ISBN)
+    lst.append(title)
+    lst.append(author)
+    lst.append(publisher)
+    lst.append(book_cost)
+    lst.append(pubDate)
+    return lst
+
+
+@app.route('/downloadbooks')
+# @login_required
+def BooksToCsv():
+    allBooks = Books.query.all()
+    if len(allBooks) == 0:
+        flash("No Books available", "danger")
+        return redirect("/")
+    si = io.StringIO()
+    cw = csv.writer(si, delimiter=",")
+    cw.writerow(["ISBN", "title", "author", "publisher", "book_cost","pubDate"])
+    for row in allBooks:
+        row = rowToListbooks(row)
+        cw.writerow(row)
+    output = make_response(si.getvalue())
+    output.headers["Content-Disposition"] = f"attachment; filename=books_response.csv"
+    output.headers["Content-type"] = "text/csv"
+    return output
