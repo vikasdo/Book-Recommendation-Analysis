@@ -48,8 +48,6 @@ mail = Mail(app)
 
 
 def helper():
-
-
     transactions=[]
     conn = sqlite3.connect(app.config["SQLITE_DB_DIR"])
     cur = conn.execute('SELECT * FROM order_list WHERE user_id=(?)',(current_user.id,))
@@ -93,8 +91,6 @@ def getDiscount():
     imp_data={}
     for x in data:
         imp_data.update(x.get_json())
-
-
 
     return jsonify(imp_data)
 
@@ -179,15 +175,6 @@ def get_data():
 
     #9 Personalized Offers Data
 
-    '''personalized_offers=[]
-    curr9 = conn.execute("""SELECT us.id,us.email,us.name,us.location,COUNT(*) AS Purchases FROM order_list o ,user us WHERE us.id=o.user_id GROUP BY(o.user_id) HAVING Purchases>=3""")
-    print(curr9[0])
-    for po in curr9:
-        print(po[0])
-    personalized_offers.append(po[1])
-    data["personalized_offers"]=personalized_offers
-    print(personalized_offers)'''
-
     conn.close()
     return data
 
@@ -196,7 +183,6 @@ def dashboard():
     data = get_data()
     print(data)
     return render_template('index.html',data = data)
-
 
 
 @app.route('/login' , methods=['GET' , 'POST'])
@@ -264,7 +250,7 @@ def register():
             return redirect(url_for('register'))
         else:
             pass
-        #generate_password_hash  is not working properly
+        #generate_password_hash is not working properly
         # password=generate_password_hash(password, method='sha256')
         new_user =  User(name=username,email=email,
                         password=password,location=location,age=age)
@@ -382,8 +368,6 @@ def single_product(bookid):
 
     print(out.columns)
     #print(out["imageUrlL"])
-
-
     return render_template('client/single.html',books=books,suggestedBooks=out,profile=helper()[0],transactions=helper()[1])
 
 
@@ -502,25 +486,13 @@ def contact():
         email = request.form.get('email')
         contact = request.form.get('contact')
         message = request.form.get('message')
-        #print(name,email,contact,message)
         if len(name) > 100 or len(email)>100 or len(contact)>20:
-            flash("Invalid details please Try agian!!","error")
+            flash("Invalid details please try agian!!","error")
             return redirect('/contact')
         entry = Contact(name=name, contact=contact,email=email, message=message)
         db.session.add(entry)
         db.session.commit()
-        flash("Thank You for Contacting Us We will reach you soon!","success")
-        #print(Contact.query.all())
-        # mail.send_message('New message from ' + name,
-        #                   sender=email,
-        #                   recipients = <gmail-user>,
-        #                   body = name + "\n" + email + "\n" + contact + "\n" + message
-        #                   )
-        # mail.send_message('New message from ' + name,
-        #                   sender= <gmail-user>,
-        #                   recipients = [email],
-        #                   body = "Thankyou for your feedback!"
-        #                   )
+        flash("Thank you for contacting us, We will reach you soon!","success")
         return redirect('/contact')
     return render_template("client/contact2.html")
 
