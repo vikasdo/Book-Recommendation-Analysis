@@ -84,7 +84,7 @@ serializer = URLSafeSerializer(app.secret_key)
 
 
 from bookstore.client.views import client
-# from bookstore.admin.views import admin
+from bookstore.admin.views import admin
 
 app.register_blueprint(client)
-# app.register_blueprint(myadmin, url_prefix='/admin')
+app.register_blueprint(admin)

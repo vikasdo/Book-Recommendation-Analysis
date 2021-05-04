@@ -1,0 +1,40 @@
+{% extends 'admin/layout.html' %}
+{% block body %}
+    <form class="row g-3" action="{{url_for('admin_add_book')}}" method="POST">
+        <div class="col-md-6">
+            <label for="Book_title" class="form-label">Book Title</label>
+            <input type="text" required class="form-control" id="Book_title" name = "Book_title">
+        </div>
+        <div class="col-md-6">
+            <label for="ISBN" class="form-label">ISBN</label>
+            <input type="text" required class="form-control" id="ISBN" name ="ISBN" >
+        </div>
+        <div class="col-md-6">
+            <label for="Author" class="form-label">Author Name</label>
+            <input type="text" required class="form-control" id="Author" name="author" placeholder="Robert Ludlum">
+        </div>
+        <div class="col-md-6">
+            <label for="publisher" class="form-label">Publisher Name</label>
+            <input type="text" required class="form-control" id="publisher" name ="publisher" >
+        </div>
+        <div class="col-md-6">
+            <label for="Book_cost" class="form-label">Book Cost</label>
+            <input type="text" required class="form-control" id="Book_cost" name = "Book_cost">
+        </div>
+        <div class="col-md-6">
+            <label for="Book_img" class="form-label">Book Image</label>
+            <input type="text" required class="form-control" id="Book_img" name="Book_img">
+        </div>
+        <center>
+            <div class="col-md-2">
+                <label for="pub_date" class="form-label">Publishing Date</label>
+                <input type="date" required class="form-control" name="pub_date">
+            </div>
+            <br>
+            <div class="col-12">
+                <button type="submit" class="btn btn-primary">Add Book</button>
+            </div>
+        </center>
+        
+    </form>
+{% endblock body %}

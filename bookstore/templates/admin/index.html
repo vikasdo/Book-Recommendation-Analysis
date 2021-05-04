@@ -1,0 +1,232 @@
+{% extends 'admin/layout.html' %}
+{% block head %}
+    <!-- Bootstrap CSS -->
+    <!-- <link rel="stylesheet" href="{{ url_for('static',filename='assets/bootstrap/bootstrap4-alpha3.min.css') }}"> -->
+    
+    <style>
+        body {
+            background-color: #fafafa;
+            font-size: 16px;
+            line-height: 1.5;
+        }
+    
+        h1,
+        h2,
+        h3,
+        h4,
+        h5,
+        h6 {
+            font-weight: 400;
+        }
+    
+        #header {
+            border-bottom: 5px solid #37474F;
+            color: #37474F;
+            margin-bottom: 1.5rem;
+            padding: 1rem 0;
+        }
+    
+        #revenue-tag {
+            font-weight: inherit !important;
+            border-radius: 0px !important;
+        }
+    
+        .card {
+            border: 0rem;
+            border-radius: 0rem;
+        }
+    
+        .card-header {
+            background-color: #37474F;
+            border-radius: 0 !important;
+            color: white;
+            margin-bottom: 0;
+            padding: 1rem;
+        }
+    
+        .card-block {
+            border: 1px solid #cccccc;
+        }
+    
+        .shadow {
+            box-shadow: 0 6px 10px 0 rgba(0, 0, 0, 0.14),
+                0 1px 18px 0 rgba(0, 0, 0, 0.12),
+                0 3px 5px -1px rgba(0, 0, 0, 0.2);
+        }
+    
+        #revenue-column-chart,
+        #products-revenue-pie-chart,
+        #orders-spline-chart {
+            height: 300px;
+            width: 100%;
+        }
+    </style>
+    
+    <!-- Scripts -->
+    <script src="{{ url_for('static',filename='assets/jquery/jquery-3.1.0.min.js') }}"></script>
+    <script src="{{ url_for('static',filename='assets/tether/tether.min.js') }}"></script>
+    <script src="{{ url_for('static',filename='assets/bootstrap/bootstrap4-alpha3.min.js') }}"></script>
+    <script src="   https://canvasjs.com/assets/script/canvasjs.min.js"></script>
+    
+    <script>
+        $(function () {
+            var totalRevenue = {{total}};
+
+            
+            var revenueColumnChart = new CanvasJS.Chart("revenue-column-chart", {
+                animationEnabled: true,
+                backgroundColor: "transparent",
+                theme: "theme2",
+                axisX: {
+                    labelFontSize: 14,
+                    valueFormatString: "MMM YYYY"
+                },
+                axisY: {
+                    labelFontSize: 14,
+                    prefix: "$"
+                },
+                toolTip: {
+                    borderThickness: 0,
+                    cornerRadius: 0
+                },
+                data: [
+                    {
+                        type: "column",
+                        yValueFormatString: "$###,###.##",
+                        dataPoints: [
+                            { x: new Date("1 Jan {{year}}"), y: {{sales_yearly[0]}} },
+                            { x: new Date("1 Feb {{year}}"), y: {{sales_yearly[1]}} },
+                            { x: new Date("1 Mar {{year}}"), y: {{sales_yearly[2]}} },
+                            { x: new Date("1 Apr {{year}}"), y: {{sales_yearly[3]}} },
+                            { x: new Date("1 May {{year}}"), y: {{sales_yearly[4]}} },
+                            { x: new Date("1 Jun {{year}}"), y: {{sales_yearly[5]}} },
+                            { x: new Date("1 Jul {{year}}"), y: {{sales_yearly[6]}} },
+                            { x: new Date("1 Aug {{year}}"), y: {{sales_yearly[7]}} },
+                            { x: new Date("1 Sep {{year}}"), y: {{sales_yearly[8]}} },
+                            { x: new Date("1 Oct {{year}}"), y: {{sales_yearly[9]}} },
+                            { x: new Date("1 Nov {{year}}"), y: {{sales_yearly[10]}} },
+                            { x: new Date("1 Dec {{year}}"), y: {{sales_yearly[11]}} }
+                        ]
+                    }
+                ]
+            });
+
+            revenueColumnChart.render();
+
+            //CanvasJS pie chart to show product wise annual revenue for 2015
+            var productsRevenuePieChart = new CanvasJS.Chart("products-revenue-pie-chart", {
+                animationEnabled: true,
+                theme: "theme2",
+                legend: {
+                    fontSize: 14
+                },
+                toolTip: {
+                    borderThickness: 0,
+                    content: "<span style='\"'color: {color};'\"'>{name}</span>: ${y} (#percent%)",
+                    cornerRadius: 0
+                },
+                data: [
+                    {
+                        indexLabelFontColor: "#676464",
+                        indexLabelFontSize: 14,
+                        legendMarkerType: "square",
+                        legendText: "{indexLabel}",
+                        showInLegend: true,
+                        startAngle: 90,
+                        type: "pie",
+                        dataPoints: [
+                            {% for key, value in books_yearly.items() %}
+                                { y: {{value}}, name: "{{key}}", indexLabel: "{{key}}", legendText: "{{key}}" },
+                            {% endfor %}
+                        ]
+                    }
+                ]
+            });
+
+            productsRevenuePieChart.render();
+
+            //CanvasJS spline chart to show orders from Jan 2015 to Dec 2015
+            var ordersSplineChart = new CanvasJS.Chart("orders-spline-chart", {
+                animationEnabled: true,
+                backgroundColor: "transparent",
+                theme: "theme2",
+                toolTip: {
+                    borderThickness: 0,
+                    cornerRadius: 0
+                },
+                axisX: {
+                    labelFontSize: 14,
+                    maximum: new Date("31 Dec {{year}}"),
+                    valueFormatString: "MMM YYYY"
+                },
+                axisY: {
+                    gridThickness: 0,
+                    labelFontSize: 14,
+                    lineThickness: 2
+                },
+                data: [
+                    {
+                        type: "spline",
+                        dataPoints: [
+                            { x: new Date("1 Jan {{year}}"), y: {{sales_yearly[0]}} },
+                            { x: new Date("1 Feb {{year}}"), y: {{sales_yearly[1]}} },
+                            { x: new Date("1 Mar {{year}}"), y: {{sales_yearly[2]}} },
+                            { x: new Date("1 Apr {{year}}"), y: {{sales_yearly[3]}} },
+                            { x: new Date("1 May {{year}}"), y: {{sales_yearly[4]}} },
+                            { x: new Date("1 Jun {{year}}"), y: {{sales_yearly[5]}} },
+                            { x: new Date("1 Jul {{year}}"), y: {{sales_yearly[6]}} },
+                            { x: new Date("1 Aug {{year}}"), y: {{sales_yearly[7]}} },
+                            { x: new Date("1 Sep {{year}}"), y: {{sales_yearly[8]}} },
+                            { x: new Date("1 Oct {{year}}"), y: {{sales_yearly[9]}} },
+                            { x: new Date("1 Nov {{year}}"), y: {{sales_yearly[10]}} },
+                            { x: new Date("1 Dec {{year}}"), y: {{sales_yearly[11]}} }
+                        ]
+                    }
+                ]
+            });
+
+            ordersSplineChart.render();
+
+        });
+    </script>
+{% endblock head %}
+
+
+{% block body %}
+    <div class="container">
+        <h2 id="header">
+            <strong>Annual Sales</strong>
+            <small class="text-muted">Jan {{year}} - Dec {{year}}</small>
+        </h2>
+    
+        <div class="row m-b-1">
+            <div class="col-xs-12">
+                <div class="card shadow">
+                    <h4 class="card-header">Revenue <span class="tag tag-success" id="revenue-tag">${{total}}</span></h4>
+                    <div class="card-block">
+                        <div id="revenue-column-chart"></div>
+                    </div>
+                </div>
+            </div>
+        </div> <!-- row -->
+    
+        <div class="row m-b-1">
+            <div class="col-lg-6">
+                <div class="card shadow">
+                    <h4 class="card-header">Book Wise Revenue</h4>
+                    <div class="card-block">
+                        <div id="products-revenue-pie-chart"></div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-lg-6">
+                <div class="card shadow">
+                    <h4 class="card-header">Orders</h4>
+                    <div class="card-block">
+                        <div id="orders-spline-chart"></div>
+                    </div>
+                </div>
+            </div>
+        </div> <!-- row -->
+    </div> <!-- container -->
+{% endblock body %}
