@@ -8,7 +8,29 @@
     <title>Admin Login</title>
 </head>
 <body>
-
+<nav class="navbar navbar-expand-lg">
+    <div class="container-fluid" >
+        
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav"
+            aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarNav">
+            <ul class="navbar-nav">
+                <li class="nav-item">
+                    <a href="{{url_for('home')}}" class="link-dark">
+                        <font face="Comic sans MS" style="padding:2%" size=" 10">Book.ly</font>
+                    </a>
+                </li>
+            </ul>
+            <ul class="navbar-nav" style="padding-left: 75%;">
+                <li class="nav-item">
+                    <a class="btn btn-warning btn-md" aria-current="page" href="{{url_for('home')}}">Back to home</a>
+                </li>
+            </ul>
+        </div>
+    </div>
+</nav>
 <div class="container">
     <div class="d-flex flex-wrap justify-content-center">
         <div class="col-lg-6 errors">
@@ -33,6 +55,7 @@
                 {% endwith %}
             </div>
         </div>
+        
     <center>
         <u><h1 class="display-3">Login</h1></u>
         <br><br><br><br><br><br>
