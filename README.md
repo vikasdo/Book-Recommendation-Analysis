@@ -11,7 +11,7 @@
 
 # Theme approach ![](https://warehouse-camo.ingress.cmh1.psfhosted.org/582ab2eba9d0e0f4acbea2fd883f604349908147/68747470733a2f2f696d672e736869656c64732e696f2f707970692f707976657273696f6e732f74656e736f72666c6f772e7376673f7374796c653d706c6173746963)
 <img align="right" src="https://media.giphy.com/media/l0HlESqXkgB97Xs7C/giphy.gif" width = "200" height = "250">
-Today, the growth of technology has enabled everyone to make and buy items online. The E-commerce industry is expected to rise in the coming years and so there is a need for an efficient E-commerce recommendation system which suggests products to users .In our project, we try to recommend products to authors, publishers and retailers by providing them with personalized feedback from user reviews. The retailers can also analyze the top trending books and focus on personalization for users or provide them with exciting offers which can motivate the user to make more purchases. We also provide a Heat map of users and give recommendations based on the demographic features also. So, in this Way the retailer gets more profits by understanding the customer and focusing on their purchase pattern.
+Today, the growth of technology has enabled everyone to make and buy items online. The E-commerce industry is expected to rise in the coming years and so there is a need for an efficient E-commerce recommendation system that suggests products to users . In our project, we try to recommend products to authors, publishers, and retailers by providing them with personalized feedback from user reviews. The retailers can also analyze the top trending books and focus on personalization for users or provide them with exciting offers which can motivate the user to make more purchases. We also provide a Heat map of users and give recommendations based on the demographic features also. So, in this Way, the retailer gets more profits by understanding the customer and focusing on their purchase pattern.
 # Document
 
 [Link to docs](https://drive.google.com/file/d/1f7TCuBrfeaU62j1wUKqRqG286XLAtAC8/view?usp=sharing)
@@ -22,14 +22,14 @@ https://colab.research.google.com/drive/18xQP5b_7MjMGtxNl-2XgHtH589J69B-K
 
 # To Setup 
 ```
-1. Actvate virtual environment
+1. Activate the virtual environment
   	
 python -m venv env
 env\Scripts\activate
 ```
 
 # Install git lfs : [referrences](https://docs.github.com/en/github/managing-large-files/installing-git-large-file-storage#:~:text=Installing%20Git%20Large%20File%20Storage.%201%20Navigate%20to,Premium%20Support.%20Be%20sure%20to%20include%20...%20)
-to know more :https://youtu.be/9gaTargV5BY
+to know more:https://youtu.be/9gaTargV5BY
 
 	git lfs install 
 	git lfs pull
@@ -62,7 +62,7 @@ python manager.py db upgrade
 
 # Contribution Guidelines🏗
 
-Are we missing any of your favorite features, which you think you can add to it❓ We invite you to contribute to this project and improve it further
+Are we missing any of your favorite features, which you think you can add to it❓ We invite you to contribute to this project and improve it further?
 
 ## To start contributing, follow the below guidelines: 
 
@@ -115,7 +115,7 @@ git checkout -b <your_branch_name>
 git add . 
 ```
 
-**10.** Commit your changes .
+**10.** Commit your changes.
 
 ```
 git commit -m "Relevant message"
@@ -127,7 +127,7 @@ git commit -m "Relevant message"
 git push -u origin <your_branch_name>
 ```
 
-**12.** To create a pull request, click on `compare and pull requests`. Please ensure you compare your feature branch to the desired branch of the repo you are suppose to make a PR to.
+**12.** To create a pull request, click on `compare and pull requests. Please ensure you compare your feature branch to the desired branch of the repo you are supposed to make a PR to.
 
 
 **13.** Add appropriate title and description to your pull request explaining your changes and efforts done.
@@ -168,3 +168,5 @@ git push -u origin <your_branch_name>
 	</tr>
 </table>
 ✨✨✨
+
+
