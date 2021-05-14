@@ -1,0 +1,35 @@
+{% extends 'admin/layout.html' %}
+{% block head %}
+    <style>
+        #textarea 
+        {
+            width: 100%;
+            height: 150px;
+            padding: 12px 20px;
+            box-sizing: border-box;
+            border-radius: 4px;
+            resize: none;
+        }
+    </style>
+{% endblock head %}
+{% block body %}
+    <center>
+        <u>
+            <h1 style="text-align: center;">Reply via Email</h1>
+        </u>
+        <h3>Name: {{contact.name}}</h3>
+        &nbsp;&nbsp;&nbsp;&nbsp;
+        <h3>Message: {{contact.message}}</h3>
+        &nbsp;&nbsp;&nbsp;&nbsp;
+        <h3>Contact Number: {{contact.contact}}</h3>
+        &nbsp;&nbsp;&nbsp;&nbsp;
+        &nbsp;&nbsp;&nbsp;&nbsp;
+        <form action="{{url_for('admin_contact_reply')}}" method="post">
+            <label for="reply_message" class="form-label"><u><h1>Message</h1></u></label>
+            <br>
+            <input type="text" name="reply_message" id="textarea">
+            <input type="submit" value="reply">
+        </form>
+    </center>
+    
+{% endblock body %}

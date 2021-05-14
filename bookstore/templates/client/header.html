@@ -124,6 +124,10 @@ a
         <a href=" {{url_for('authordb')}} " type="button" class="btn btn-md"
           style="background-color: #8a2be2; color:#fff">Author</a>
       </li>
+      <li class="nav-item mx-3 my-1">
+        <a href=" {{url_for('admin_login')}} " type="button" class="btn btn-md"
+          style="background-color: #8a2be2; color:#fff">Admin</a>
+      </li>
       {% else %}
       <li class="nav-item">
         <a href="#!" data-toggle="modal" id="basket" data-target="#cartModalCenter" class="nav-link navbar-link ">
@@ -184,7 +188,7 @@ a
         <span aria-hidden="true">&times;</span>
       </button>
   </div>
-  {% endfor %}
+  {% endfor %} 
   {% endif %}
   {% endwith %}
 </div>

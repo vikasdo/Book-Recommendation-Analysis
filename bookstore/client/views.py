@@ -304,7 +304,7 @@ def transaction():
 
         for key,value in data.items():
             value=ast.literal_eval(value)
-            frd = OrderList(book_ISBN=key,quantity=value[1],user_id=current_user.id,total_price=total)
+            frd = OrderList(book_ISBN=key,quantity=value[1],user_id=current_user.id,total_price=total, selling_date = datetime.datetime.now())
             db.session.add(frd)
             db.session.commit()
 
