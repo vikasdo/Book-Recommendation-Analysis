@@ -70,7 +70,7 @@ class OrderList(db.Model):
 	quantity = db.Column(db.Integer,nullable=False)
 	user_id=db.Column(db.Integer,db.ForeignKey('user.id'))
 	total_price = db.Column(db.Integer,nullable=False)
-
+	selling_date = db.Column(db.DateTime, nullable = False)
 
 '''
 

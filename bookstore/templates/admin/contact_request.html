@@ -1,0 +1,48 @@
+{% extends 'admin/layout.html' %}
+{% block head %}
+<style>
+    table {
+        font-family: arial, sans-serif;
+        border-collapse: collapse;
+        width: 100%;
+    }
+
+    td,
+    th {
+        border: 1px solid #dddddd;
+        text-align: left;
+        padding: 8px;
+    }
+
+    tr:nth-child(even) {
+        background-color: #dddddd;
+    }
+</style>
+{% endblock head %}
+{% block body %}
+        <table>
+            <tr>
+                <th>Name</th>
+                <th>Email</th>
+                <th>Contact Number</th>
+                <th>Message</th>
+                <th>Action</th>
+            </tr>
+            
+                {% for contact in to_contact %}
+                <tr>
+                    <td>{{contact.name}}</td>
+                    <td>{{contact.email}}</td>
+                    <td>{{contact.contact}}</td>
+                    <td>{{contact.message}}</td>
+                    <td>
+                        <form action="{{url_for('admin_contact_request')}}" method="post">
+                            <button type="submit" name = 'reply' value = '{{contact.cid}}'>Reply</button>
+                            <button type="submit" name = 'delete' value = '{{contact.cid}}' >delete</button>
+                        </form>
+                    </td>
+                </tr>
+                {% endfor %}
+            
+        </table>
+{% endblock body %}
