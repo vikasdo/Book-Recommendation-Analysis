@@ -20,6 +20,19 @@ Today, the growth of technology has enabled everyone to make and buy items onlin
 https://colab.research.google.com/drive/1W3bnFPMFdxa1ExdYQxuYv43k5QzFrG10
 https://colab.research.google.com/drive/18xQP5b_7MjMGtxNl-2XgHtH589J69B-K
 
+## 👩‍💻 Technology Stack
+#### **Tools**
+
+- Jupyter Notebook/ Google Colab / PySpark
+
+- **Front End** : HTML / CSS / JavaScript
+
+- **Back End** : MongoDB / Flask
+
+- **Python version** : 3.0 or Higher
+
+- **Libraries**: sklearn numpy, scipy, matplotlib
+
 # To Setup 
 ```
 1. Activate the virtual environment
