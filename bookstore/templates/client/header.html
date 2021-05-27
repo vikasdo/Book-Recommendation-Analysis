@@ -19,7 +19,7 @@ p=e.getElementsByTagName(a)[0];p.parentNode.insertBefore(m,p);
 </script>
     <title>Book.ly</title>
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
-
+    <link rel="stylesheet" href="{{ url_for('static',filename='css/darkmode.css') }}">
     <style>
     html {
   scroll-behavior: smooth;
@@ -74,10 +74,6 @@ a
     margin: 30px;
   }
 }
-
-
-
-
     </style>
   </head>
   <body>
@@ -154,7 +150,16 @@ a
                 </li>
 
       {% endif %}
-      
+      <li class="nav-item">
+        <a href="#" type="button"class="btn" >
+          <!-- partial:index.partial.html -->
+          <label id ="switch" class="switch">
+            <input type="checkbox" onchange="toggleTheme()" id="slider">
+            <span class="slider round"></span>
+          </label>
+          <!-- partial -->
+        </a>
+      </li>
     </ul>
 
   </div>
@@ -333,5 +338,7 @@ e.preventDefault();
 $('html, body').animate({scrollTop:0}, '300');
 });
   </script>
+  <script src="{{ url_for('static',filename='js/darkmode.js') }}"></script>
+  
 </body>
 </html>
