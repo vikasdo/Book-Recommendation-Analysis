@@ -74,6 +74,14 @@ a
     margin: 30px;
   }
 }
+.dark-mode a
+{
+  color: #fff!important;
+}
+.dark-mode .card {
+  background-color: #888787 !important;
+  color: #fff !important;
+}
     </style>
   </head>
   <body>
@@ -133,20 +141,20 @@ a
         </a>
       </li>
       <li class="nav-item">
-        <a href="{{url_for('home')}}" class="nav-link waves-effect">
+        <a href="{{url_for('home')}}" class="nav-link waves-effect ">
           Shop
         </a>
       </li>
           <li class="nav-item">
             <a href="{{url_for('myprofile')}}" type="button"
-            class="btn btn-outline-primary btn-sm" data-toggle="modal" data-target="#abc">My Profile </a>
+            class="btn btn-outline-primary btn-md" data-toggle="modal" data-target="#abc">My Profile </a>
       </li>
       <li class="nav-item">
         <a href="#" type="button"
-          class="btn btn-outline-primary btn-sm" id="logout-user" onclick="confirmation()">Logout</a>
+          class="btn btn-outline-primary btn-md" id="logout-user" onclick="confirmation()">Logout</a>
       </li>
       <li class="nav-item">
-                    <a href=" {{url_for('contact')}} " type="button" class="btn btn-outline-primary btn-sm">Contact</a>
+                    <a href=" {{url_for('contact')}} " type="button" class="btn btn-outline-primary btn-md">Contact</a>
                 </li>
 
       {% endif %}
