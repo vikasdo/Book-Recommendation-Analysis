@@ -19,7 +19,7 @@ p=e.getElementsByTagName(a)[0];p.parentNode.insertBefore(m,p);
 </script>
     <title>Book.ly</title>
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
-
+    <link rel="stylesheet" href="{{ url_for('static',filename='css/darkmode.css') }}">
     <style>
     html {
   scroll-behavior: smooth;
@@ -74,10 +74,14 @@ a
     margin: 30px;
   }
 }
-
-
-
-
+.dark-mode a
+{
+  color: #fff!important;
+}
+.dark-mode .card {
+  background-color: #888787 !important;
+  color: #fff !important;
+}
     </style>
   </head>
   <body>
@@ -137,24 +141,33 @@ a
         </a>
       </li>
       <li class="nav-item">
-        <a href="{{url_for('home')}}" class="nav-link waves-effect">
+        <a href="{{url_for('home')}}" class="nav-link waves-effect ">
           Shop
         </a>
       </li>
           <li class="nav-item">
             <a href="{{url_for('myprofile')}}" type="button"
-            class="btn btn-outline-primary btn-sm" data-toggle="modal" data-target="#abc">My Profile </a>
+            class="btn btn-outline-primary btn-md" data-toggle="modal" data-target="#abc">My Profile </a>
       </li>
       <li class="nav-item">
         <a href="#" type="button"
-          class="btn btn-outline-primary btn-sm" id="logout-user" onclick="confirmation()">Logout</a>
+          class="btn btn-outline-primary btn-md" id="logout-user" onclick="confirmation()">Logout</a>
       </li>
       <li class="nav-item">
-                    <a href=" {{url_for('contact')}} " type="button" class="btn btn-outline-primary btn-sm">Contact</a>
+                    <a href=" {{url_for('contact')}} " type="button" class="btn btn-outline-primary btn-md">Contact</a>
                 </li>
 
       {% endif %}
-      
+      <li class="nav-item">
+        <a href="#" type="button"class="btn" >
+          <!-- partial:index.partial.html -->
+          <label id ="switch" class="switch">
+            <input type="checkbox" onchange="toggleTheme()" id="slider">
+            <span class="slider round"></span>
+          </label>
+          <!-- partial -->
+        </a>
+      </li>
     </ul>
 
   </div>
@@ -333,5 +346,7 @@ e.preventDefault();
 $('html, body').animate({scrollTop:0}, '300');
 });
   </script>
+  <script src="{{ url_for('static',filename='js/darkmode.js') }}"></script>
+  
 </body>
 </html>

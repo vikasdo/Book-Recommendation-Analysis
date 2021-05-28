@@ -22,7 +22,10 @@
     tr:nth-child(even) {
         background-color: #dddddd;
     }
-
+    .dark-mode
+    {
+        background-color: #282828;
+    }
 </style>
     <script>
 
@@ -133,6 +136,7 @@
     </script>
 <center>
 <body>
+    <script src="{{ url_for('static',filename='js/darkmode.js') }}"></script>
     {% if not is_named_in %}
     <form action="/authordb" method="POST">
         <input type="text" name="author_name" autofocus placeholder="Author Name" required>
@@ -202,6 +206,7 @@
     {% endif %}
 
 
+    
 </body>
 </center>
 

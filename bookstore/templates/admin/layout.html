@@ -9,6 +9,7 @@
     {% block head %}
     {% endblock head %}
     <title>Admin Bookly</title>
+    <link rel="stylesheet" href="{{ url_for('static',filename='css/darkmode.css') }}">
 </head>
 <body>
         <nav class="navbar navbar-expand-lg">
@@ -64,5 +65,6 @@
         </div>
     {% block body %}
     {% endblock body %}
+    <script src="{{ url_for('static',filename='js/darkmode.js') }}"></script>
 </body>
 </html>
