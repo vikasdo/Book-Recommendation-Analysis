@@ -22,42 +22,45 @@
     </style>
 </head>
 <body>
-        <nav class="navbar navbar-expand-lg">
+    <nav class="navbar navbar-expand-lg navbar-light bg-light">
+        
+        <div class="container-fluid">
             <a href="{{url_for('admin_index')}}" class="link-dark">
                 <font face="Comic sans MS" style="padding:2%" size=" 10">Book.ly</font>
             </a>
-            <div class="container-fluid" style="padding-left: 55%;">
-                <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav"
-                    aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
-                    <span class="navbar-toggler-icon"></span>
-                </button>
-                <div class="collapse navbar-collapse" id="navbarNav">
-                    <ul class="navbar-nav mt-2">
-                        <li class="nav-item">
-                            <a class="btn btn-warning btn-md" aria-current="page" href="{{url_for('admin_add_book')}}">Add Book</a>
-                        </li>
-                        &nbsp;&nbsp;&nbsp;&nbsp;
-                        <li class="nav-item">
-                            <a class="btn btn-info" href="{{url_for('admin_contact_request')}}">Contact Request</a>
-                        </li>
-                        &nbsp;&nbsp;&nbsp;&nbsp;
-                        <li class="nav-item">
-                            <a class="btn btn-warning btn-md" href="{{url_for('admin_logout')}}">Logout</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="btn" href="#">
-                                <!-- partial:index.partial.html -->
-                                <label id ="switch" class="switch">
-                                    <input type="checkbox" onchange="toggleTheme()" id="slider">
-                                    <span class="slider round"></span>
-                                </label>
-                                <!-- partial -->
-                            </a>
-                        </li>
-                    </ul>
-                </div>
-            </div>
-        </nav>
+          <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+          </button>
+          <div class="collapse navbar-collapse" id="navbarSupportedContent">
+            <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+                <li class="nav-item">
+                    <a class="btn btn-warning btn-md" aria-current="page" href="{{url_for('admin_add_book')}}">Add Book</a>
+                </li>
+                &nbsp;&nbsp;&nbsp;&nbsp;
+                <li class="nav-item">
+                    <a class="btn btn-info" href="{{url_for('admin_contact_request')}}">Contact Request</a>
+                </li>
+                &nbsp;&nbsp;&nbsp;&nbsp;
+                <li class="nav-item">
+                    <a class="btn btn-warning btn-md" href="{{url_for('admin_logout')}}">Logout</a>
+                </li>
+                <li class="nav-item">
+                    <a class="btn" href="#">
+                        <!-- partial:index.partial.html -->
+                        <label id ="switch" class="switch">
+                            <input type="checkbox" onchange="toggleTheme()" id="slider">
+                            <span class="slider round"></span>
+                        </label>
+                        <!-- partial -->
+                    </a>
+                </li>
+
+            </ul>
+            
+          </div>
+        </div>
+      </nav>
+       
     <br><br>
 <div class="container">
     <div class="d-flex flex-wrap justify-content-center">
@@ -86,5 +89,6 @@
     {% block body %}
     {% endblock body %}
     <script src="{{ url_for('static',filename='js/darkmode.js') }}"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.1/dist/js/bootstrap.bundle.min.js" integrity="sha384-gtEjrD/SeCtmISkJkNUaaKMoLD0//ElJ19smozuHV6z3Iehds+3Ulb9Bn9Plx0x4" crossorigin="anonymous"></script>
 </body>
 </html>
