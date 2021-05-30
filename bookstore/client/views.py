@@ -46,6 +46,17 @@ app.config["MAIL_USE_TLS"] = True
 app.config["MAIL_USERNAME"] = "bookly1120"
 mail = Mail(app)
 
+def send_warning_email(email):
+    import smtplib
+    con = smtplib.SMTP("smtp.gmail.com",587)
+    con.ehlo()
+    con.starttls()
+    admin_email = "admin_email"
+    admin_password = "admin_password"
+    con.login(admin_email,admin_password)
+    msg = "Some One is Trying To Login With Your Account !!"
+    con.sendmail(admin_email,email,"Subject:Login Warning \n\n"+msg)
+
 
 def helper():
     transactions=[]
@@ -184,7 +195,7 @@ def dashboard():
     print(data)
     return render_template('index.html',data = data)
 
-
+login_users = {}
 @app.route('/login' , methods=['GET' , 'POST'])
 def login():
     #added by arpit
@@ -204,10 +215,24 @@ def login():
             return redirect(url_for('register'))
         # form validations for login added by arpit
         elif str(ok.password) == (str(password)):
+            if email in login_users.keys():
+                del(login_users[ok.email])
             login_user(ok)
             flash("Login Success :)",'success')
             return redirect(url_for('home'))
         else:
+            print(login_user)
+            print("Someone tried to login and failed.")
+            if email in login_users.keys():
+                login_users[email]+=1
+            else:
+                login_users[email]=1
+            print(login_users)
+            if login_users[email] == 5:
+                user1 =  User.query.filter_by(email=email).first()
+                print(user1.email)
+                send_warning_email(user1.email)
+                print("They used username: {} and password: {}".format(email,password))
             flash("Wrong password :(","error")
             return redirect(url_for("login"))
     return render_template('client/login.html')
