@@ -446,7 +446,31 @@ def forgotpwd():
         else:
             flash("Email not found")
             return redirect(url_for("forgotpwd"))
-
+            
+@app.route("/changePassword", methods=["POST", "GET"])
+@login_required
+def changePassword():
+    if request.method == "POST":
+        new_password = request.form["new_password"]
+        confirm_password = request.form["confirm_password"]
+        print(new_password,confirm_password,current_user.password)
+        if len(new_password)<=5:
+                flash('Password must be at least 6 characters Long!!',"error")
+                return redirect("/changePassword")
+        else:
+            pass
+        if new_password != confirm_password:
+            flash("Password not Matched","error")
+            return redirect("/changePassword")
+        else:
+            current_user.password=new_password
+            flash(f'Password Changed Successfully','success')
+            db.session.commit()
+            print(new_password,confirm_password,current_user.password)
+            return redirect("/")
+    else:
+        pass
+    return render_template('client/changePassword.html')
 
 @app.route("/otp", methods=["POST", "GET"])
 def otp():
