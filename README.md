@@ -41,7 +41,7 @@ python -m venv env
 env\Scripts\activate
 ```
 
-# Install git lfs : [referrences](https://docs.github.com/en/github/managing-large-files/installing-git-large-file-storage#:~:text=Installing%20Git%20Large%20File%20Storage.%201%20Navigate%20to,Premium%20Support.%20Be%20sure%20to%20include%20...%20)
+# Install git lfs : [References](https://docs.github.com/en/github/managing-large-files/installing-git-large-file-storage#:~:text=Installing%20Git%20Large%20File%20Storage.%201%20Navigate%20to,Premium%20Support.%20Be%20sure%20to%20include%20...%20)
 to know more:https://youtu.be/9gaTargV5BY
 
 	git lfs install 
