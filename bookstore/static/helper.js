@@ -48,7 +48,7 @@ setTimeout(()=>{
 // for add to cart
 
 $(document).ready(function(){
-    $('#wishlist').text(localStorage.length)
+    $('#wishlist').text(localStorage.length-1)
 
     $('#add-to-cart').click( ()=>{
         
@@ -79,12 +79,12 @@ $(document).ready(function(){
             localStorage.setItem(product_id,JSON.stringify(sa))
 
             console.log(localStorage.getItem(product_id))
-            $('#wishlist').text(localStorage.length)
+            $('#wishlist').text(localStorage.length-1)
             $('#add-to-cart').text("Added to cart")
 
     })
     $('#logout-user').click(()=>{
-        localStorage.clear();
+//        localStorage.clear();
         console.log("Session Data Cleared..")
     })
 
@@ -109,12 +109,24 @@ $(document).ready(function(){
             </table>`)
 
         for(let i=0;i<localStorage.length;i++){
+//            let product_name=localStorage.key(i);
+//
+//            let price = JSON.parse(localStorage.getItem(product_name))[0]
+//
+//            let quantity = JSON.parse(localStorage.getItem(product_name))[1]
             let product_name=localStorage.key(i);
-            
-            let price = JSON.parse(localStorage.getItem(product_name))[0]
-            
-            let quantity = JSON.parse(localStorage.getItem(product_name))[1]
+            p = localStorage.getItem(product_name)
+            if (product_name == "theme")
+            {
+            i += 1
+            product_name=localStorage.key(i);
+            }
 
+            p = localStorage.getItem(product_name)
+            let price = JSON.parse(p)[0]
+
+
+            let quantity = JSON.parse(p)[1]
 
             let html_content =`<tr>
                                 <td>${product_name}</td>
